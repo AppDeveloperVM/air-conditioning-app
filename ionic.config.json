@@ -1,0 +1,7 @@
+{
+  "name": "air-conditioning-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
