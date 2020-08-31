@@ -25,3 +25,16 @@
 #container a {
   text-decoration: none;
 }
+
+#screen {
+  min-height: 200px;
+  border:2px solid blue;
+  border-radius:4px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
