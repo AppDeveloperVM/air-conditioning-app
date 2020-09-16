@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-grid>
+  <ion-grid id="container" class="fondo">
     <ion-row>
     <ion-col col-xl="10" col-md="12" >
     <ion-row>
@@ -22,7 +22,7 @@
       <ion-col>
       </ion-col>
       <ion-col>
-        <ion-button color="warning" expand="block">POWER</ion-button>
+        <ion-button color="warning" expand="block"><ion-icon name="power"></ion-icon > </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -30,12 +30,12 @@
         <div id="screen">
           <div *ngIf="isLoading"><ion-spinner></ion-spinner></div>
           <div *ngIf="!isLoading" color="primary">
-            <ion-row > 
+            <ion-row class="full_height"> 
               <ion-col >
                 CLOCK
               </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row >
               <ion-col class="time">
                 {{ data.time }}
               </ion-col>
@@ -44,14 +44,14 @@
               <ion-col class="bordered">
                 MODE
               </ion-col>
-              <ion-col class="bordered">
-                <ion-row class="bordered">
+              <ion-col class="bordered no_padding">
+                <ion-row>
                   <ion-col>
-                    -
+                    {{ data.temp }} ºC
                   </ion-col>
                 </ion-row>
-                <ion-row class="bordered" >
-                  <ion-col>
+                <ion-row class="top-border" >
+                  <ion-col class="middle-border"> 
                     -
                   </ion-col>
                   <ion-col>
@@ -72,7 +72,7 @@
         <ion-button expand="block">MODE</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button expand="block">+</ion-button>  
+        <ion-button expand="block" color="danger">+</ion-button>  
       </ion-col>
       <ion-col>
         <ion-button expand="block">FAN</ion-button>
@@ -83,7 +83,7 @@
       <ion-col>
       </ion-col>
       <ion-col>
-          <ion-button expand="block">-</ion-button>
+          <ion-button expand="block" color="secondary">-</ion-button>
       </ion-col>
       <ion-col>
       </ion-col>

@@ -1,12 +1,12 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.fondo {
+  background-color: black;
 }
+
+#container {
+  height: 100%;
+}
+
+
 
 #container strong {
   font-size: 20px;
@@ -27,7 +27,7 @@
 }
 
 #screen {
-  min-height: 200px;
+  //min-height: 200px;
   border:2px solid blue;
   border-radius:4px;
 }
@@ -44,8 +44,32 @@
   font-size: 25px;
 }
 
+.full_height {
+  height: 100%;
+}
+
+.no_padding {
+  padding: 0;
+}
+
 .bordered {
   border:1px solid blue;
+}
+
+.top-border {
+  border-top:1px solid blue;
+}
+.middle-border {
+  border-right:1px solid blue;
+}
+
+
+.heat {
+  background-color: darkred;
+}
+
+.cold {
+  background-color: darkblue;
 }
 
 .oya {
