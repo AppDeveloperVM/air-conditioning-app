@@ -38,3 +38,20 @@
   align-items: center;
   height: 100px;
 }
+
+.time {
+  text-align:center;
+  font-size: 25px;
+}
+
+.bordered {
+  border:1px solid blue;
+}
+
+.oya {
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto auto;
+  grid-template-rows: max-content auto auto;
+
+}
