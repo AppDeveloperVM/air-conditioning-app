@@ -27,7 +27,44 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div id="screen"></div>
+        <div id="screen">
+          <div *ngIf="isLoading"><ion-spinner></ion-spinner></div>
+          <div *ngIf="!isLoading" color="primary">
+            <ion-row > 
+              <ion-col >
+                CLOCK
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="time">
+                {{ data.time }}
+              </ion-col>
+            </ion-row>
+            <ion-row >
+              <ion-col class="bordered">
+                MODE
+              </ion-col>
+              <ion-col class="bordered">
+                <ion-row class="bordered">
+                  <ion-col>
+                    -
+                  </ion-col>
+                </ion-row>
+                <ion-row class="bordered" >
+                  <ion-col>
+                    -
+                  </ion-col>
+                  <ion-col>
+                    -
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col class="bordered">
+                FAN
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
