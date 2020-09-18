@@ -24,7 +24,7 @@ export class AirDataService {
     return this._airConditioners.pipe(
       take(1),
       map(airconditioners => {
-        return {...airconditioners.find(a => a.brand === brand)}
+        return {...airconditioners.find(a => a.brand === brand,a =>  a.model === model)}
       })
     )
   }
