@@ -1,0 +1,56 @@
+<ion-grid id="container" class="fondo">
+  <ion-row>
+  <ion-col col-xl="10" col-md="12" >
+  <ion-row>
+    <ion-col>
+    </ion-col>
+    <ion-col>
+    </ion-col>
+    <ion-col>
+      <ion-button color="warning" expand="block"><ion-icon name="power"></ion-icon > </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div id="screen">
+        <div *ngIf="isLoading"><ion-spinner></ion-spinner></div>
+        <div *ngIf="!isLoading" color="primary">
+
+          <app-screen [data]="data"></app-screen>
+          
+          </div>
+        </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>   
+      <ion-button expand="block">MODE</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" color="danger" (click)="tempUp()">+</ion-button>  
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block">FAN</ion-button>
+    </ion-col>
+    
+  </ion-row>
+  <ion-row>
+    <ion-col>
+    </ion-col>
+    <ion-col>
+        <ion-button expand="block" color="secondary" (click)="tempDown()">-</ion-button>
+    </ion-col>
+    <ion-col>
+    </ion-col>
+  </ion-row>
+  <ion-item-divider></ion-item-divider>
+
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col><ion-button expand="block">SWING<br>LOUVER</ion-button></ion-col>
+    <ion-col><ion-button expand="block">AIR FLOW<br>DIRECTION</ion-button></ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-col>
+</ion-row>
+</ion-grid>
