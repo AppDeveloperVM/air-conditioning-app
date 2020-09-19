@@ -5,7 +5,7 @@
     </ion-row>
     <ion-row >
       <ion-col class="time">
-        <span *ngIf="data">{{ time }}</span>
+        <span *ngIf="time">{{ time }}</span>
       </ion-col>
     </ion-row>
     <ion-row >
@@ -15,7 +15,7 @@
       <ion-col class="bordered no_padding">
         <ion-row>
           <ion-col>
-            <div *ngIf="data"><span #temperature>{{ temp }}</span> ºC</div>
+            <div *ngIf="temp"><span #temperature>{{ temp }}</span> ºC</div>
           </ion-col>
         </ion-row>
         <ion-row class="top-border" >

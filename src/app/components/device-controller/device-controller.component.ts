@@ -13,24 +13,24 @@ export class DeviceControllerComponent {
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
     this.isLoading = true;
-    //parseInt(this.data.temp);
+    // parseInt(this.data.temp);
     this.temp = 20;
     this.isLoading = false;
    }
 
   tempUp(){
-    let new_temp;
-    new_temp = this.temp++;
-    this.data.temp = new_temp;
-    console.log("temp:"+this.temp);
-    return new_temp;
+    let newTemp;
+    newTemp = this.temp++;
+    this.data.temp = newTemp;
+    console.log('temp:' + this.temp);
+    return newTemp;
   }
 
   tempDown() {
-    let new_temp;
-    new_temp = this.temp--;
-    console.log("temp:"+this.temp);
-    return new_temp;
+    let newTemp = 0;
+    newTemp = this.temp--;
+    console.log('temp:' + this.temp);
+    return newTemp;
   }
 
 }
