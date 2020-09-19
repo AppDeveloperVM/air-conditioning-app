@@ -1,0 +1,54 @@
+#screen {
+    //min-height: 200px;
+    border:2px solid blue;
+    border-radius:4px;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .time {
+    text-align:center;
+    font-size: 25px;
+  }
+  
+  .full_height {
+    height: 100%;
+  }
+  
+  .no_padding {
+    padding: 0;
+  }
+  
+  .bordered {
+    border:1px solid blue;
+  }
+  
+  .top-border {
+    border-top:1px solid blue;
+  }
+  .middle-border {
+    border-right:1px solid blue;
+  }
+  
+  
+  .heat {
+    background-color: darkred;
+  }
+  
+  .cold {
+    background-color: darkblue;
+  }
+  
+  .oya {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto auto;
+    grid-template-rows: max-content auto auto;
+  
+  }
+  

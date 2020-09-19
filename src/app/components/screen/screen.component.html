@@ -1,0 +1,33 @@
+    <ion-row class="full_height"> 
+      <ion-col >
+        CLOCK
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="time">
+        <span *ngIf="data">{{ time }}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="bordered">
+        MODE
+      </ion-col>
+      <ion-col class="bordered no_padding">
+        <ion-row>
+          <ion-col>
+            <div *ngIf="data"><span #temperature>{{ temp }}</span> ºC</div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="top-border" >
+          <ion-col class="middle-border"> 
+            -
+          </ion-col>
+          <ion-col>
+            -
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col class="bordered">
+        FAN
+      </ion-col>
+    </ion-row>
