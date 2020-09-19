@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { AirConditioner } from './models/air-conditioner.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy{
-  @ViewChild('temp', { static: false }) tempElementRef: ElementRef;
+  
   device : AirConditioner;
   brand : string;
   model: string;
@@ -27,6 +27,7 @@ export class HomePage implements OnInit, OnDestroy{
     private httpClient: HttpClient,
     public navCtrl: NavController,
     public alertCtrl: AlertController
+    
   ) {
     this.isLoading = true;
     this.airData = this.httpClient.get('https://run.mocky.io/v3/967ef4af-4739-480e-96ca-239888d65b9f');
@@ -36,7 +37,7 @@ export class HomePage implements OnInit, OnDestroy{
       this.data = response.data;
       this.isLoading = false;
 
-      this.setTemp();
+      
     });
 
   }
@@ -68,12 +69,10 @@ export class HomePage implements OnInit, OnDestroy{
 
   setTemp(){
     this.temp = parseInt(this.data.temp);
+    
   }
 
-  tempUp(){
-    this.temp = this.temp + 1;
-    console.log(this.temp);
-  }
+  
 
   getState() {
     return this.httpClient.get('');
