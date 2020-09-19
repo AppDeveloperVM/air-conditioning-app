@@ -11,15 +11,15 @@ import { AirConditioner } from './models/air-conditioner.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy{
-  device : AirConditioner;
-  brand : string;
+  device: AirConditioner;
+  brand: string;
   model: string;
   private airSubscription: Subscription;
 
-  airData : Observable<any>;
+  airData: Observable<any>;
   isLoading = false;
   data: any;
-  temp:number;
+  temp: number;
 
   constructor(
     private airdataService: AirDataService,
