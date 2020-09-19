@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
@@ -11,8 +11,9 @@ import { AirConditioner } from './models/air-conditioner.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy{
-  device: AirConditioner;
-  brand: string;
+  @ViewChild('temp', { static: false }) tempElementRef: ElementRef;
+  device : AirConditioner;
+  brand : string;
   model: string;
   private airSubscription: Subscription;
 
