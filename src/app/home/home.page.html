@@ -43,13 +43,13 @@
             </ion-row>
             <ion-row class="bottom_row">
               <ion-col class="bordered mode_list">
-                <div [hidden]=standard_mode class="standard_mode">    
+                <div [hidden]=standardMode class="standard_mode">    
                   STANDARD             
                 </div>
-                <div [hidden]=heat_mode class="heat_mode">
+                <div [hidden]=heatMode class="heat_mode">
                   HEAT
                 </div>
-                <div [hidden]=cold_mode class="cold_mode">
+                <div [hidden]=coldMode class="cold_mode">
                   COLD
                 </div>
               </ion-col>
@@ -59,7 +59,7 @@
                     <div *ngIf="temp"><span #temperature>{{ temp }}</span> ºC</div>
                     <div class="swing_air">
                       <div [hidden]=swing class="swing"><ion-icon name="swap-vertical-outline"></ion-icon></div>
-                      <div [hidden]=air_flow class="air_flow"><ion-icon name="help-buoy-outline"></ion-icon></div>
+                      <div [hidden]=airFlow class="air_flow"><ion-icon name="help-buoy-outline"></ion-icon></div>
                     </div>
                   </ion-col>
                 </ion-row>

@@ -24,17 +24,17 @@ export class HomePage implements OnInit, OnDestroy{
 
   time = '00:00';
   temp = 0;
-  Mode: any = ['Heat', 'Cold', 'Standard']; //modes
+  Mode: any = ['Heat', 'Cold', 'Standard']; // modes
   fan: any = [];
 
-  mode_index: number;
-  //hide div = boolean
-  standard_mode = true;
-  heat_mode = true;
-  cold_mode = true;
+  modeIndex: number;
+  // hide div = boolean
+  standardMode = true;
+  heatMode = true;
+  coldMode = true;
 
   swing = true;
-  air_flow = true;
+  airFlow = true;
 
 
   constructor(
@@ -54,7 +54,6 @@ export class HomePage implements OnInit, OnDestroy{
       this.setTime();
       this.setTemp();
       this.setMode();
-      
     });
 
   }
@@ -88,7 +87,6 @@ export class HomePage implements OnInit, OnDestroy{
   setTime(){
     this.time = this.updatedData.time;
     console.log('time:' + this.time);
-    
   }
 
   setTemp(){
@@ -113,87 +111,87 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   setMode(){
-    let mode_i;
-    mode_i = this.mode_index;
-    console.log("mode value:" + mode_i);
-    if(isNaN(mode_i)){
-      mode_i = 0;
+    let modeIndex;
+    modeIndex = this.modeIndex;
+    console.log('mode value:' + modeIndex);
+    if (isNaN(modeIndex)){
+      modeIndex = 0;
     }
-    if(mode_i > 2){
-      mode_i = 0;
+    if (modeIndex > 2){
+      modeIndex = 0;
     }
-    console.log("mode value:" + mode_i);
-    
-    switch(mode_i){
-      case 0: 
-        this.standard_mode = false;
-        this.heat_mode = true;
-        this.cold_mode = true;
+    console.log('mode value:' + modeIndex);
+
+    switch (modeIndex){
+      case 0:
+        this.standardMode = false;
+        this.heatMode = true;
+        this.coldMode = true;
         break;
       case 1:
-        this.standard_mode = true;
-        this.heat_mode = false;
-        this.cold_mode = true;
+        this.standardMode = true;
+        this.heatMode = false;
+        this.coldMode = true;
         break;
       case 2:
-        this.standard_mode = true;
-        this.heat_mode = true;
-        this.cold_mode = false;
+        this.standardMode = true;
+        this.heatMode = true;
+        this.coldMode = false;
         break;
     }
-    mode_i++;
-    this.mode_index = mode_i;
+    modeIndex++;
+    this.modeIndex = modeIndex;
   }
 
   setFan(){
-    let mode_i;
-    mode_i = this.mode_index;
-    console.log("mode value:" + mode_i);
-    if(isNaN(mode_i)){
-      mode_i = 0;
+    let modeIndex;
+    modeIndex = this.modeIndex;
+    console.log('mode value:' + modeIndex);
+    if (isNaN(modeIndex)){
+      modeIndex = 0;
     }
-    if(mode_i > 2){
-      mode_i = 0;
+    if (modeIndex > 2){
+      modeIndex = 0;
     }
-    console.log("mode value:" + mode_i);
-    
-    switch(mode_i){
-      case 0: 
-        this.standard_mode = false;
-        this.heat_mode = true;
-        this.cold_mode = true;
+    console.log('mode value:' + modeIndex);
+
+    switch (modeIndex){
+      case 0:
+        this.standardMode = false;
+        this.heatMode = true;
+        this.coldMode = true;
         break;
       case 1:
-        this.standard_mode = true;
-        this.heat_mode = false;
-        this.cold_mode = true;
+        this.standardMode = true;
+        this.heatMode = false;
+        this.coldMode = true;
         break;
       case 2:
-        this.standard_mode = true;
-        this.heat_mode = true;
-        this.cold_mode = false;
+        this.standardMode = true;
+        this.heatMode = true;
+        this.coldMode = false;
         break;
     }
-    mode_i++;
-    this.mode_index = mode_i;
+    modeIndex++;
+    this.modeIndex = modeIndex;
   }
 
   setSwing(){
-    if(this.swing){
+    if (this.swing){
       this.swing = false;
-    }else{
+    } else {
       this.swing = true;
     }
-    console.log('swing: '+this.swing);
+    console.log('swing: ' + this.swing);
   }
 
   setAirFlow(){
-    if(this.air_flow){
-      this.air_flow = false;
+    if (this.airFlow){
+      this.airFlow = false;
     }else{
-      this.air_flow = true;
+      this.airFlow = true;
     }
-    console.log('air flow: '+this.air_flow);
+    console.log('air flow: ' + this.airFlow);
   }
 
   getState() {
