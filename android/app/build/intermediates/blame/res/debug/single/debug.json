@@ -36,12 +36,12 @@
         "source": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_splash.png.flat",
-        "source": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\splash.png"
-    },
-    {
         "merged": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_splash.png.flat",
+        "source": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\splash.png"
     },
     {
         "merged": "C:\\Users\\devil\\Documents\\GitHub\\air-conditioning-app\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-mdpi_splash.png.flat",
