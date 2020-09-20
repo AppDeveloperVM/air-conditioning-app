@@ -41,22 +41,34 @@
                 <span *ngIf="time">{{ time }}</span>
               </ion-col>
             </ion-row>
-            <ion-row >
-              <ion-col class="bordered">
-                MODE
+            <ion-row class="bottom_row">
+              <ion-col class="bordered mode_list">
+                <div [hidden]=standard_mode class="standard_mode">    
+                  STANDARD             
+                </div>
+                <div [hidden]=heat_mode class="heat_mode">
+                  HEAT
+                </div>
+                <div [hidden]=cold_mode class="cold_mode">
+                  COLD
+                </div>
               </ion-col>
               <ion-col class="bordered no_padding">
-                <ion-row>
+                <ion-row class="general_row">
                   <ion-col>
                     <div *ngIf="temp"><span #temperature>{{ temp }}</span> ºC</div>
+                    <div class="swing_air">
+                      <div [hidden]=swing class="swing"><ion-icon name="swap-vertical-outline"></ion-icon></div>
+                      <div [hidden]=air_flow class="air_flow"><ion-icon name="help-buoy-outline"></ion-icon></div>
+                    </div>
                   </ion-col>
                 </ion-row>
-                <ion-row class="top-border" >
-                  <ion-col class="middle-border"> 
-                    -
+                <ion-row class="setters_row top-border" >
+                  <ion-col class="middle-border" >  
+                    <div >-</div>
                   </ion-col>
                   <ion-col>
-                    -
+                    <div >-</div>
                   </ion-col>
                 </ion-row>
               </ion-col>
@@ -71,7 +83,7 @@
     </ion-row>
     <ion-row>
       <ion-col>   
-        <ion-button expand="block">MODE</ion-button>
+        <ion-button expand="block" (click)="setMode()">MODE</ion-button>
       </ion-col>
       <ion-col>
         <ion-button expand="block" color="danger" (click)="tempUp()">+</ion-button>  
@@ -94,8 +106,8 @@
   
     <ion-row>
       <ion-col></ion-col>
-      <ion-col><ion-button expand="block">SWING<br>LOUVER</ion-button></ion-col>
-      <ion-col><ion-button expand="block">AIR FLOW<br>DIRECTION</ion-button></ion-col>
+      <ion-col><ion-button expand="block" (click)="setSwing()">SWING<br>LOUVER</ion-button></ion-col>
+      <ion-col><ion-button expand="block" (click)="setAirFlow()">AIR FLOW<br>DIRECTION</ion-button></ion-col>
       <ion-col></ion-col>
     </ion-row>
   </ion-col>

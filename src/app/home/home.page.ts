@@ -27,6 +27,15 @@ export class HomePage implements OnInit, OnDestroy{
   Mode: any = ['Heat', 'Cold', 'Standard']; //modes
   fan: any = [];
 
+  mode_index: number;
+  //hide div = boolean
+  standard_mode = true;
+  heat_mode = true;
+  cold_mode = true;
+
+  swing = true;
+  air_flow = true;
+
 
   constructor(
     private airdataService: AirDataService,
@@ -42,7 +51,10 @@ export class HomePage implements OnInit, OnDestroy{
       this.data = response.data;
       this.isLoading = false;
       this.updatedData = this.data;
+      this.setTime();
       this.setTemp();
+      this.setMode();
+      
     });
 
   }
@@ -73,6 +85,12 @@ export class HomePage implements OnInit, OnDestroy{
     });
   }
 
+  setTime(){
+    this.time = this.updatedData.time;
+    console.log('time:' + this.time);
+    
+  }
+
   setTemp(){
     this.temp = this.updatedData.temp;
     console.log('temp:' + this.temp);
@@ -92,6 +110,90 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.temp = newTemp;
     console.log('temp:' + this.temp);
     return newTemp;
+  }
+
+  setMode(){
+    let mode_i;
+    mode_i = this.mode_index;
+    console.log("mode value:" + mode_i);
+    if(isNaN(mode_i)){
+      mode_i = 0;
+    }
+    if(mode_i > 2){
+      mode_i = 0;
+    }
+    console.log("mode value:" + mode_i);
+    
+    switch(mode_i){
+      case 0: 
+        this.standard_mode = false;
+        this.heat_mode = true;
+        this.cold_mode = true;
+        break;
+      case 1:
+        this.standard_mode = true;
+        this.heat_mode = false;
+        this.cold_mode = true;
+        break;
+      case 2:
+        this.standard_mode = true;
+        this.heat_mode = true;
+        this.cold_mode = false;
+        break;
+    }
+    mode_i++;
+    this.mode_index = mode_i;
+  }
+
+  setFan(){
+    let mode_i;
+    mode_i = this.mode_index;
+    console.log("mode value:" + mode_i);
+    if(isNaN(mode_i)){
+      mode_i = 0;
+    }
+    if(mode_i > 2){
+      mode_i = 0;
+    }
+    console.log("mode value:" + mode_i);
+    
+    switch(mode_i){
+      case 0: 
+        this.standard_mode = false;
+        this.heat_mode = true;
+        this.cold_mode = true;
+        break;
+      case 1:
+        this.standard_mode = true;
+        this.heat_mode = false;
+        this.cold_mode = true;
+        break;
+      case 2:
+        this.standard_mode = true;
+        this.heat_mode = true;
+        this.cold_mode = false;
+        break;
+    }
+    mode_i++;
+    this.mode_index = mode_i;
+  }
+
+  setSwing(){
+    if(this.swing){
+      this.swing = false;
+    }else{
+      this.swing = true;
+    }
+    console.log('swing: '+this.swing);
+  }
+
+  setAirFlow(){
+    if(this.air_flow){
+      this.air_flow = false;
+    }else{
+      this.air_flow = true;
+    }
+    console.log('air flow: '+this.air_flow);
   }
 
   getState() {

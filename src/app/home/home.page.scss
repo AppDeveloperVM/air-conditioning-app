@@ -63,6 +63,9 @@
   border-right:1px solid blue;
 }
 
+.bottom_row{
+  height: 100px;
+}
 
 .heat {
   background-color: darkred;
@@ -72,10 +75,52 @@
   background-color: darkblue;
 }
 
-.oya {
-  display: grid;
+.mode_list{
   height: 100%;
-  grid-template-columns: auto auto;
-  grid-template-rows: max-content auto auto;
+  padding:3px;
+}
 
+.standard_mode {
+  display: block;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+}
+.heat_mode{
+  display: block;
+  height: 20px;
+  margin:0;
+  margin-top:18px;
+}
+.cold_mode{
+  display: block;
+  height: 20px;
+  margin:0px;
+  margin-top:40px;
+}
+
+.general_row{
+  height: auto;
+}
+
+.swing_air div{
+  display: inline-block;
+  margin-left:1px;
+  margin-right: 1px;
+}
+
+.swing_air .swing {
+  position: absolute;
+  margin-left: 1px;
+}
+
+.swing_air .air_flow{
+  position: absolute;
+  margin-left: 20px;
+}
+
+.setters_row{
+  height: 20px;
+  position: sticky;
+  top: 30vh;
 }
