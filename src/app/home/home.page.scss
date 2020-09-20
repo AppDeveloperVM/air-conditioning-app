@@ -122,5 +122,38 @@
 .setters_row{
   height: 20px;
   position: sticky;
-  top: 30vh;
+  top: 33vh;
+}
+
+.fanSpin {
+  margin-top: 5px;
+}
+
+.fanSpin div{
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.levels div{
+  display: inline-block;
+  margin-left: 3px;
+  margin-right: 4px;
+}
+
+.levels div .fan1{
+  position: absolute;
+  margin-left: 0px;
+}
+.levels div .fan2{
+  position: absolute;
+  margin-left: 20px;
+}
+.levels div .fan3{
+  position: absolute;
+  margin-left: 40px;
+}
+.levels div .fan4{
+  position: absolute;
+  margin-left: 60px;
 }

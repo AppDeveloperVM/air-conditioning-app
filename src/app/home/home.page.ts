@@ -35,6 +35,12 @@ export class HomePage implements OnInit, OnDestroy{
 
   swing = true;
   airFlow = true;
+  fanSpeed = 1;
+
+  fan1 = true;
+  fan2 = true;
+  fan3 = true;
+  fan4 = true;
 
 
   constructor(
@@ -54,6 +60,7 @@ export class HomePage implements OnInit, OnDestroy{
       this.setTime();
       this.setTemp();
       this.setMode();
+      this.setFanSpeed();
     });
 
   }
@@ -143,37 +150,43 @@ export class HomePage implements OnInit, OnDestroy{
     this.modeIndex = modeIndex;
   }
 
-  setFan(){
-    let modeIndex;
-    modeIndex = this.modeIndex;
-    console.log('mode value:' + modeIndex);
-    if (isNaN(modeIndex)){
-      modeIndex = 0;
+  setFanSpeed(){
+    let fanActualSpeed;
+    fanActualSpeed = this.fanSpeed;
+    if (fanActualSpeed === 5){
+      fanActualSpeed = 1;
     }
-    if (modeIndex > 2){
-      modeIndex = 0;
-    }
-    console.log('mode value:' + modeIndex);
+    console.log('fan speed: ' + fanActualSpeed);
 
-    switch (modeIndex){
-      case 0:
-        this.standardMode = false;
-        this.heatMode = true;
-        this.coldMode = true;
-        break;
+    switch (fanActualSpeed){
       case 1:
-        this.standardMode = true;
-        this.heatMode = false;
-        this.coldMode = true;
+        this.fan1 = false;
+        this.fan2 = true;
+        this.fan3 = true;
+        this.fan4 = true;
         break;
       case 2:
-        this.standardMode = true;
-        this.heatMode = true;
-        this.coldMode = false;
+        this.fan1 = false;
+        this.fan2 = false;
+        this.fan3 = true;
+        this.fan4 = true;
+        break;
+      case 3:
+        this.fan1 = false;
+        this.fan2 = false;
+        this.fan3 = false;
+        this.fan4 = true;
+        break;
+      case 4:
+        this.fan1 = false;
+        this.fan2 = false;
+        this.fan3 = false;
+        this.fan4 = false;
         break;
     }
-    modeIndex++;
-    this.modeIndex = modeIndex;
+
+    fanActualSpeed++;
+    this.fanSpeed = fanActualSpeed;
   }
 
   setSwing(){
