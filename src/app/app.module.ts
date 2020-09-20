@@ -11,6 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RestApiService } from './services/rest-api.service';
 
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,6 +22,7 @@ import { RestApiService } from './services/rest-api.service';
     BrowserModule,
      IonicModule.forRoot(),
       AppRoutingModule,
+      FontAwesomeModule,
        HttpClientModule
   ],
   providers: [
@@ -28,4 +33,8 @@ import { RestApiService } from './services/rest-api.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}
