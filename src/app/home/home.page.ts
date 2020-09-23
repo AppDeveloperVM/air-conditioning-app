@@ -1,9 +1,13 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
 import { AirDataService } from '../services/air-data.service';
 import { AirConditioner } from './models/air-conditioner.model';
+import { DeviceStatus } from './models/device-status.model';
+import { map, tap } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +15,8 @@ import { AirConditioner } from './models/air-conditioner.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy{
+
+  API = 'https://ddae5242-5a5a-4ba9-b9c6-9e2bcb433d93.mock.pstmn.io';
 
   device: AirConditioner;
   brand: string;
@@ -35,7 +41,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   swing = true;
   airFlow = true;
-  fanSpeed = 1;
+  fanSpeed: number;
 
   fan1 = true;
   fan2 = true;
@@ -50,19 +56,7 @@ export class HomePage implements OnInit, OnDestroy{
     public alertCtrl: AlertController
   ) {
     this.isLoading = true;
-    this.airData = this.httpClient.get('https://run.mocky.io/v3/967ef4af-4739-480e-96ca-239888d65b9f');
-    this.airData
-    .subscribe(response => {
-      console.log('my data: ', response);
-      this.data = response.data;
-      this.isLoading = false;
-      this.updatedData = this.data;
-      this.setTime();
-      this.setTemp();
-      this.setMode();
-      this.setFanSpeed();
-    });
-
+    this.getStatus();
   }
 
   ngOnInit() {
@@ -91,6 +85,21 @@ export class HomePage implements OnInit, OnDestroy{
     });
   }
 
+  getStatus() {
+    this.airData = this.httpClient.get(`${this.API}/status`);
+    this.airData
+    .subscribe(response => {
+      console.log('my data: ', response);
+      this.data = response.status; // previusly response.data
+      this.isLoading = false;
+      this.updatedData = this.data;
+      this.setTime();
+      this.setTemp();
+      this.setMode();
+      this.setFanSpeed();
+    });
+  }
+
   setTime(){
     this.time = this.updatedData.time;
     console.log('time:' + this.time);
@@ -103,18 +112,18 @@ export class HomePage implements OnInit, OnDestroy{
 
   tempUp(){
     let newTemp;
+    newTemp = this.updatedData.temp ;
     newTemp = this.temp++;
     this.updatedData.temp = newTemp;
     console.log('temp:' + newTemp);
-    return newTemp;
   }
 
   tempDown() {
     let newTemp;
+    newTemp = this.updatedData.temp ;
     newTemp = this.temp--;
     this.updatedData.temp = newTemp;
-    console.log('temp:' + this.temp);
-    return newTemp;
+    console.log('temp:' + newTemp);
   }
 
   setMode(){
@@ -152,7 +161,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   setFanSpeed(){
     let fanActualSpeed;
-    fanActualSpeed = this.fanSpeed;
+    fanActualSpeed = this.updatedData.fan_speed;
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
@@ -186,6 +195,7 @@ export class HomePage implements OnInit, OnDestroy{
     }
 
     fanActualSpeed++;
+    this.updatedData.fan_speed = fanActualSpeed;
     this.fanSpeed = fanActualSpeed;
   }
 
@@ -207,8 +217,23 @@ export class HomePage implements OnInit, OnDestroy{
     console.log('air flow: ' + this.airFlow);
   }
 
-  getState() {
-    return this.httpClient.get('');
+  updateStatus() {
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // let params = new HttpParams().append('id': "");
+    const options = { headers }; // second param, "params"
+
+    return this.httpClient
+    .put(`${this.API}/updateStatus`, null, options)
+    .pipe(
+      map((response: Response) => {
+        /*const status : new DeviceStatus[] = response.json();
+        return recipe;*/
+      }),
+      tap((/*status: DeviceStatus[]*/) => {
+          // this.recipeService.setRecipes(recipes);
+      })
+    );
   }
 
   ngOnDestroy() {
