@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { stringify } from 'querystring';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { take, map, delay, tap, switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { AirConditioner } from '../home/models/air-conditioner.model';
 
 interface DeviceStatusData {
@@ -30,17 +28,17 @@ export class DeviceStatusService {
   ) { }
 
   setDeviceStatus(id: string) {
-    //set time by actual time or the device already set time?
-    //set temp, mode, fan
+    // set time by actual time or the device already set time?
+    // set temp, mode, fan
   }
 
   getDeviceStatus(id: string) {
-    
+
   }
 
   updateStatus(
     time: string,
-    temp: Number,
+    temp: number,
     mode: string,
     fan: string
   ) {

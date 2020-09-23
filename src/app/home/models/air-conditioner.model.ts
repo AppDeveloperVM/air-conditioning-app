@@ -3,6 +3,6 @@ export class AirConditioner {
         public brand: string,
         public model: string
     ) {
-        
+
     }
 }

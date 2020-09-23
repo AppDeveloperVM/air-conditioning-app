@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AirConditioner } from '../home/models/air-conditioner.model';
-import { take, map, delay, tap, switchMap } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 
 
 
