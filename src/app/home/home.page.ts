@@ -1,12 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
 import { AirDataService } from '../services/air-data.service';
 import { AirConditioner } from './models/air-conditioner.model';
-import { DeviceStatus } from './models/device-status.model';
 import { map, tap } from 'rxjs/operators';
-import 'rxjs/add/operator/map';
 
 
 @Component({
