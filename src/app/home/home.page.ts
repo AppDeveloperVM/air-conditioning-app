@@ -14,7 +14,11 @@ import { map, tap } from 'rxjs/operators';
 })
 export class HomePage implements OnInit, OnDestroy{
 
+  // testing API
   API = 'https://ddae5242-5a5a-4ba9-b9c6-9e2bcb433d93.mock.pstmn.io';
+
+  // real url
+  deviceUrl = 'http://85.57.77.218:350/';
 
   device: AirConditioner;
   brand: string;
@@ -28,8 +32,9 @@ export class HomePage implements OnInit, OnDestroy{
 
   time = '00:00';
   temp = 0;
-  Mode: any = ['Heat', 'Cold', 'Standard']; // modes
-  fan: any = [];
+  mode: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
+  fan: any = ['AUTO', 'HIGH', 'MED', 'LOW', 'QUIET'];
+  powerOn = true;
 
   modeIndex: number;
   // hide div = boolean
@@ -84,58 +89,60 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   getStatus() {
-    this.airData = this.httpClient.get(`${this.API}/status`);
+    this.airData = this.httpClient.get(`${this.API}/STATUS`);
     this.airData
     .subscribe(response => {
       console.log('my data: ', response);
       this.data = response.status; // previusly response.data
       this.isLoading = false;
       this.updatedData = this.data;
-      this.setTime();
-      this.setTemp();
-      this.setMode();
-      this.setFanSpeed();
+      this.initVars();
+      this.initMode();
+      this.initFanSpeed();
     });
   }
 
-  setTime(){
+  initVars() {
+    console.log('updatedData:' , this.updatedData);
     this.time = this.updatedData.time;
-    console.log('time:' + this.time);
-  }
-
-  setTemp(){
     this.temp = this.updatedData.temp;
-    console.log('temp:' + this.temp);
+    this.modeIndex = 0; // this.updatedData.masterCtrl;
+    this.mode = 0; // this.mode[this.modeIndex];
+    this.fanSpeed = 2; // this.updatedData.fanCtrl;
+    this.swing = this.updatedData.swing;
+    this.airFlow = this.updatedData.airFlow;
+    this.powerOn = this.updatedData.powerOn;
   }
 
-  tempUp(){
-    let newTemp;
-    newTemp = this.updatedData.temp ;
-    newTemp = this.temp++;
-    this.updatedData.temp = newTemp;
-    console.log('temp:' + newTemp);
-  }
-
-  tempDown() {
-    let newTemp;
-    newTemp = this.updatedData.temp ;
-    newTemp = this.temp--;
-    this.updatedData.temp = newTemp;
-    console.log('temp:' + newTemp);
-  }
-
-  setMode(){
+  initMode(){
     let modeIndex;
     modeIndex = this.modeIndex;
-    console.log('mode value:' + modeIndex);
     if (isNaN(modeIndex)){
       modeIndex = 0;
     }
     if (modeIndex > 2){
       modeIndex = 0;
     }
-    console.log('mode value:' + modeIndex);
+    this.setMode(modeIndex);
+  }
 
+  changeMode(){
+    let modeIndex;
+    modeIndex = this.modeIndex;
+    modeIndex++;
+    if (isNaN(modeIndex)){
+      modeIndex = 0;
+    }
+    if (modeIndex > 2){
+      modeIndex = 0;
+    }
+    this.modeIndex = modeIndex;
+    // this.mode = this.mode[this.modeIndex];
+    console.log('mode value:' + modeIndex);
+    this.setMode(modeIndex);
+  }
+
+  setMode(modeIndex){
     switch (modeIndex){
       case 0:
         this.standardMode = false;
@@ -153,19 +160,35 @@ export class HomePage implements OnInit, OnDestroy{
         this.coldMode = false;
         break;
     }
-    modeIndex++;
-    this.modeIndex = modeIndex;
   }
 
-  setFanSpeed(){
+  initFanSpeed(){
     let fanActualSpeed;
-    fanActualSpeed = this.updatedData.fan_speed;
+    fanActualSpeed = this.fanSpeed;
+    if (fanActualSpeed === 5){
+      fanActualSpeed = 1;
+    }
+    console.log('fan speed: ' + fanActualSpeed);
+    this.setFanSpeed(fanActualSpeed);
+  }
+
+  changeFanSpeed(){
+    let fanActualSpeed;
+    fanActualSpeed = this.fanSpeed;
+    fanActualSpeed++;
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
     console.log('fan speed: ' + fanActualSpeed);
 
-    switch (fanActualSpeed){
+    this.updatedData.fanCtrl = fanActualSpeed;
+    this.fanSpeed = fanActualSpeed;
+
+    this.setFanSpeed(fanActualSpeed);
+  }
+
+  setFanSpeed(fanSpeed){
+    switch (fanSpeed){
       case 1:
         this.fan1 = false;
         this.fan2 = true;
@@ -191,10 +214,6 @@ export class HomePage implements OnInit, OnDestroy{
         this.fan4 = false;
         break;
     }
-
-    fanActualSpeed++;
-    this.updatedData.fan_speed = fanActualSpeed;
-    this.fanSpeed = fanActualSpeed;
   }
 
   setSwing(){
@@ -203,6 +222,7 @@ export class HomePage implements OnInit, OnDestroy{
     } else {
       this.swing = true;
     }
+    this.updatedData.swing = this.swing;
     console.log('swing: ' + this.swing);
   }
 
@@ -212,26 +232,61 @@ export class HomePage implements OnInit, OnDestroy{
     }else{
       this.airFlow = true;
     }
+    this.updatedData.airflow = this.airFlow;
+    console.log('status:', this.updatedData);
     console.log('air flow: ' + this.airFlow);
+  }
+
+  tempUp(){
+    let newTemp;
+    newTemp = this.updatedData.temp ;
+    newTemp = this.temp++;
+    this.updatedData.temp = newTemp;
+    console.log('temp:' + newTemp);
+
+    this.updateStatus();
+  }
+
+  tempDown() {
+    let newTemp;
+    newTemp = this.updatedData.temp ;
+    newTemp = this.temp--;
+    this.updatedData.temp = newTemp;
+    console.log('temp:' + newTemp);
   }
 
   updateStatus() {
 
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    // let params = new HttpParams().append('id': "");
-    const options = { headers }; // second param, "params"
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json' );
 
-    return this.httpClient
-    .put(`${this.API}/updateStatus`, null, options)
-    .pipe(
-      map((response: Response) => {
-        /*const status : new DeviceStatus[] = response.json();
-        return recipe;*/
-      }),
-      tap((/*status: DeviceStatus[]*/) => {
-          // this.recipeService.setRecipes(recipes);
-      })
-    );
+    const postData = {
+      time: this.updatedData.time,
+      temp: this.updatedData.temp,
+      masterCtrl: this.updatedData.mode,
+      fanCtrl: this.updatedData.fanSpeed,
+      powerOn: 'ON',
+      swing: this.updatedData.swing ? true : false,
+      air_direction: 1
+    };
+
+    this.httpClient.post(
+      this.deviceUrl,
+      postData,
+      { headers:
+        {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+        }
+      }
+    )
+    .subscribe(data => {
+      console.log('Updated data send!');
+      console.log(data['_body']);
+    }, error => {
+        console.log(error);
+    });
   }
 
   ngOnDestroy() {
