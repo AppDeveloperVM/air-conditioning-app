@@ -281,6 +281,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _services_air_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/air-data.service */ "./src/app/services/air-data.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
 
 
 
@@ -292,6 +294,7 @@ let HomePage = class HomePage {
         this.httpClient = httpClient;
         this.navCtrl = navCtrl;
         this.alertCtrl = alertCtrl;
+        this.API = 'https://ddae5242-5a5a-4ba9-b9c6-9e2bcb433d93.mock.pstmn.io';
         this.isLoading = false;
         this.data = [];
         this.updatedData = [];
@@ -305,24 +308,12 @@ let HomePage = class HomePage {
         this.coldMode = true;
         this.swing = true;
         this.airFlow = true;
-        this.fanSpeed = 1;
         this.fan1 = true;
         this.fan2 = true;
         this.fan3 = true;
         this.fan4 = true;
         this.isLoading = true;
-        this.airData = this.httpClient.get('https://run.mocky.io/v3/967ef4af-4739-480e-96ca-239888d65b9f');
-        this.airData
-            .subscribe(response => {
-            console.log('my data: ', response);
-            this.data = response.data;
-            this.isLoading = false;
-            this.updatedData = this.data;
-            this.setTime();
-            this.setTemp();
-            this.setMode();
-            this.setFanSpeed();
-        });
+        this.getStatus();
     }
     ngOnInit() {
         this.isLoading = true;
@@ -344,6 +335,20 @@ let HomePage = class HomePage {
             });
         });
     }
+    getStatus() {
+        this.airData = this.httpClient.get(`${this.API}/status`);
+        this.airData
+            .subscribe(response => {
+            console.log('my data: ', response);
+            this.data = response.status; // previusly response.data
+            this.isLoading = false;
+            this.updatedData = this.data;
+            this.setTime();
+            this.setTemp();
+            this.setMode();
+            this.setFanSpeed();
+        });
+    }
     setTime() {
         this.time = this.updatedData.time;
         console.log('time:' + this.time);
@@ -354,17 +359,17 @@ let HomePage = class HomePage {
     }
     tempUp() {
         let newTemp;
+        newTemp = this.updatedData.temp;
         newTemp = this.temp++;
         this.updatedData.temp = newTemp;
         console.log('temp:' + newTemp);
-        return newTemp;
     }
     tempDown() {
         let newTemp;
+        newTemp = this.updatedData.temp;
         newTemp = this.temp--;
         this.updatedData.temp = newTemp;
-        console.log('temp:' + this.temp);
-        return newTemp;
+        console.log('temp:' + newTemp);
     }
     setMode() {
         let modeIndex;
@@ -399,7 +404,7 @@ let HomePage = class HomePage {
     }
     setFanSpeed() {
         let fanActualSpeed;
-        fanActualSpeed = this.fanSpeed;
+        fanActualSpeed = this.updatedData.fan_speed;
         if (fanActualSpeed === 5) {
             fanActualSpeed = 1;
         }
@@ -431,6 +436,7 @@ let HomePage = class HomePage {
                 break;
         }
         fanActualSpeed++;
+        this.updatedData.fan_speed = fanActualSpeed;
         this.fanSpeed = fanActualSpeed;
     }
     setSwing() {
@@ -451,8 +457,18 @@ let HomePage = class HomePage {
         }
         console.log('air flow: ' + this.airFlow);
     }
-    getState() {
-        return this.httpClient.get('');
+    updateStatus() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+        // let params = new HttpParams().append('id': "");
+        const options = { headers }; // second param, "params"
+        return this.httpClient
+            .put(`${this.API}/updateStatus`, null, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])((response) => {
+            /*const status : new DeviceStatus[] = response.json();
+            return recipe;*/
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(( /*status: DeviceStatus[]*/) => {
+            // this.recipeService.setRecipes(recipes);
+        }));
     }
     ngOnDestroy() {
         if (this.airSubscription) {

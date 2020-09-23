@@ -494,17 +494,22 @@
       var _services_air_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../services/air-data.service */
       "./src/app/services/air-data.service.ts");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs/operators */
+      "./node_modules/rxjs/_esm2015/operators/index.js");
 
       var HomePage = /*#__PURE__*/function () {
         function HomePage(airdataService, httpClient, navCtrl, alertCtrl) {
-          var _this = this;
-
           _classCallCheck(this, HomePage);
 
           this.airdataService = airdataService;
           this.httpClient = httpClient;
           this.navCtrl = navCtrl;
           this.alertCtrl = alertCtrl;
+          this.API = 'https://ddae5242-5a5a-4ba9-b9c6-9e2bcb433d93.mock.pstmn.io';
           this.isLoading = false;
           this.data = [];
           this.updatedData = [];
@@ -519,40 +524,25 @@
           this.coldMode = true;
           this.swing = true;
           this.airFlow = true;
-          this.fanSpeed = 1;
           this.fan1 = true;
           this.fan2 = true;
           this.fan3 = true;
           this.fan4 = true;
           this.isLoading = true;
-          this.airData = this.httpClient.get('https://run.mocky.io/v3/967ef4af-4739-480e-96ca-239888d65b9f');
-          this.airData.subscribe(function (response) {
-            console.log('my data: ', response);
-            _this.data = response.data;
-            _this.isLoading = false;
-            _this.updatedData = _this.data;
-
-            _this.setTime();
-
-            _this.setTemp();
-
-            _this.setMode();
-
-            _this.setFanSpeed();
-          });
+          this.getStatus();
         }
 
         _createClass(HomePage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this2 = this;
+            var _this = this;
 
             this.isLoading = true;
             this.airSubscription = this.airdataService.getAirConditioner(this.brand, this.model).subscribe(function (device) {
-              _this2.device = device;
-              _this2.isLoading = false;
+              _this.device = device;
+              _this.isLoading = false;
             }, function (error) {
-              _this2.alertCtrl.create({
+              _this.alertCtrl.create({
                 header: 'An error ocurred!',
                 message: 'Could not load data. Try again later.',
                 buttons: [{
@@ -561,6 +551,28 @@
               }).then(function (alertEl) {
                 alertEl.present();
               });
+            });
+          }
+        }, {
+          key: "getStatus",
+          value: function getStatus() {
+            var _this2 = this;
+
+            this.airData = this.httpClient.get("".concat(this.API, "/status"));
+            this.airData.subscribe(function (response) {
+              console.log('my data: ', response);
+              _this2.data = response.status; // previusly response.data
+
+              _this2.isLoading = false;
+              _this2.updatedData = _this2.data;
+
+              _this2.setTime();
+
+              _this2.setTemp();
+
+              _this2.setMode();
+
+              _this2.setFanSpeed();
             });
           }
         }, {
@@ -579,19 +591,19 @@
           key: "tempUp",
           value: function tempUp() {
             var newTemp;
+            newTemp = this.updatedData.temp;
             newTemp = this.temp++;
             this.updatedData.temp = newTemp;
             console.log('temp:' + newTemp);
-            return newTemp;
           }
         }, {
           key: "tempDown",
           value: function tempDown() {
             var newTemp;
+            newTemp = this.updatedData.temp;
             newTemp = this.temp--;
             this.updatedData.temp = newTemp;
-            console.log('temp:' + this.temp);
-            return newTemp;
+            console.log('temp:' + newTemp);
           }
         }, {
           key: "setMode",
@@ -637,7 +649,7 @@
           key: "setFanSpeed",
           value: function setFanSpeed() {
             var fanActualSpeed;
-            fanActualSpeed = this.fanSpeed;
+            fanActualSpeed = this.updatedData.fan_speed;
 
             if (fanActualSpeed === 5) {
               fanActualSpeed = 1;
@@ -676,6 +688,7 @@
             }
 
             fanActualSpeed++;
+            this.updatedData.fan_speed = fanActualSpeed;
             this.fanSpeed = fanActualSpeed;
           }
         }, {
@@ -701,9 +714,23 @@
             console.log('air flow: ' + this.airFlow);
           }
         }, {
-          key: "getState",
-          value: function getState() {
-            return this.httpClient.get('');
+          key: "updateStatus",
+          value: function updateStatus() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+              'Content-Type': 'application/json'
+            }); // let params = new HttpParams().append('id': "");
+
+            var options = {
+              headers: headers
+            }; // second param, "params"
+
+            return this.httpClient.put("".concat(this.API, "/updateStatus"), null, options).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
+              /*const status : new DeviceStatus[] = response.json();
+              return recipe;*/
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function ()
+            /*status: DeviceStatus[]*/
+            {// this.recipeService.setRecipes(recipes);
+            }));
           }
         }, {
           key: "ngOnDestroy",
