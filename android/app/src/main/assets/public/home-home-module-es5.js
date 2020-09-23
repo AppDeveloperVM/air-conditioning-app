@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-grid id=\"container\" class=\"fondo\">\n  <ion-row>\n  <ion-col col-xl=\"10\" col-md=\"12\" >\n  <ion-row>\n    <ion-col>\n    </ion-col>\n    <ion-col>\n    </ion-col>\n    <ion-col>\n      <ion-button color=\"warning\" expand=\"block\"><ion-icon name=\"power\"></ion-icon > </ion-button>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <div id=\"screen\">\n        <div *ngIf=\"isLoading\"><ion-spinner></ion-spinner></div>\n        <div *ngIf=\"!isLoading\" color=\"primary\">\n\n          <app-screen [data]=\"data\"></app-screen>\n          \n          </div>\n        </div>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>   \n      <ion-button expand=\"block\">MODE</ion-button>\n    </ion-col>\n    <ion-col>\n      <ion-button expand=\"block\" color=\"danger\" (click)=\"tempUp()\">+</ion-button>  \n    </ion-col>\n    <ion-col>\n      <ion-button expand=\"block\">FAN</ion-button>\n    </ion-col>\n    \n  </ion-row>\n  <ion-row>\n    <ion-col>\n    </ion-col>\n    <ion-col>\n        <ion-button expand=\"block\" color=\"secondary\" (click)=\"tempDown()\">-</ion-button>\n    </ion-col>\n    <ion-col>\n    </ion-col>\n  </ion-row>\n  <ion-item-divider></ion-item-divider>\n\n  <ion-row>\n    <ion-col></ion-col>\n    <ion-col><ion-button expand=\"block\">SWING<br>LOUVER</ion-button></ion-col>\n    <ion-col><ion-button expand=\"block\">AIR FLOW<br>DIRECTION</ion-button></ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n</ion-col>\n</ion-row>\n</ion-grid>";
+      __webpack_exports__["default"] = "<ion-grid id=\"container\" class=\"fondo\">\r\n  <ion-row>\r\n  <ion-col col-xl=\"10\" col-md=\"12\" >\r\n  <ion-row>\r\n    <ion-col>\r\n    </ion-col>\r\n    <ion-col>\r\n    </ion-col>\r\n    <ion-col>\r\n      <ion-button color=\"warning\" expand=\"block\"><ion-icon name=\"power\"></ion-icon > </ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  <ion-row>\r\n    <ion-col>\r\n      <div id=\"screen\">\r\n        <div *ngIf=\"isLoading\"><ion-spinner></ion-spinner></div>\r\n        <div *ngIf=\"!isLoading\" color=\"primary\">\r\n\r\n          <app-screen [data]=\"data\"></app-screen>\r\n          \r\n          </div>\r\n        </div>\r\n    </ion-col>\r\n  </ion-row>\r\n  <ion-row>\r\n    <ion-col>   \r\n      <ion-button expand=\"block\">MODE</ion-button>\r\n    </ion-col>\r\n    <ion-col>\r\n      <ion-button expand=\"block\" color=\"danger\" (click)=\"tempUp()\">+</ion-button>  \r\n    </ion-col>\r\n    <ion-col>\r\n      <ion-button expand=\"block\">FAN</ion-button>\r\n    </ion-col>\r\n    \r\n  </ion-row>\r\n  <ion-row>\r\n    <ion-col>\r\n    </ion-col>\r\n    <ion-col>\r\n        <ion-button expand=\"block\" color=\"secondary\" (click)=\"tempDown()\">-</ion-button>\r\n    </ion-col>\r\n    <ion-col>\r\n    </ion-col>\r\n  </ion-row>\r\n  <ion-item-divider></ion-item-divider>\r\n\r\n  <ion-row>\r\n    <ion-col></ion-col>\r\n    <ion-col><ion-button expand=\"block\">SWING<br>LOUVER</ion-button></ion-col>\r\n    <ion-col><ion-button expand=\"block\">AIR FLOW<br>DIRECTION</ion-button></ion-col>\r\n    <ion-col></ion-col>\r\n  </ion-row>\r\n</ion-col>\r\n</ion-row>\r\n</ion-grid>";
       /***/
     },
 
@@ -62,7 +62,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Air conditioner \r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" >\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Air conditioner</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-grid id=\"container\" class=\"fondo\">\r\n    <ion-row>\r\n    <ion-col col-xl=\"10\" col-md=\"12\" >\r\n    <ion-row>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button color=\"warning\" expand=\"block\"><ion-icon name=\"power\"></ion-icon > </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <div id=\"screen\">\r\n          <div *ngIf=\"isLoading\"><ion-spinner></ion-spinner></div>\r\n          <div *ngIf=\"!isLoading\" color=\"primary\">\r\n  \r\n            <ion-row class=\"full_height\"> \r\n              <ion-col >\r\n                CLOCK\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row >\r\n              <ion-col class=\"time\">\r\n                <span *ngIf=\"time\">{{ time }}</span>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"bottom_row\">\r\n              <ion-col class=\"bordered mode_list\">\r\n                <div [hidden]=standard_mode class=\"standard_mode\">    \r\n                  STANDARD             \r\n                </div>\r\n                <div [hidden]=heat_mode class=\"heat_mode\">\r\n                  HEAT\r\n                </div>\r\n                <div [hidden]=cold_mode class=\"cold_mode\">\r\n                  COLD\r\n                </div>\r\n              </ion-col>\r\n              <ion-col class=\"bordered no_padding\">\r\n                <ion-row class=\"general_row\">\r\n                  <ion-col>\r\n                    <div *ngIf=\"temp\"><span #temperature>{{ temp }}</span> ºC</div>\r\n                    <div class=\"swing_air\">\r\n                      <div [hidden]=swing class=\"swing\"><ion-icon name=\"swap-vertical-outline\"></ion-icon></div>\r\n                      <div [hidden]=air_flow class=\"air_flow\"><ion-icon name=\"help-buoy-outline\"></ion-icon></div>\r\n                    </div>\r\n                  </ion-col>\r\n                </ion-row>\r\n                <ion-row class=\"setters_row top-border\" >\r\n                  <ion-col class=\"middle-border\" >  \r\n                    <div >-</div>\r\n                  </ion-col>\r\n                  <ion-col>\r\n                    <div >-</div>\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-col>\r\n              <ion-col class=\"bordered\">\r\n                FAN\r\n              </ion-col>\r\n            </ion-row>\r\n            \r\n            </div>\r\n          </div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>   \r\n        <ion-button expand=\"block\" (click)=\"setMode()\">MODE</ion-button>\r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button expand=\"block\" color=\"danger\" (click)=\"tempUp()\">+</ion-button>  \r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button expand=\"block\">FAN</ion-button>\r\n      </ion-col>\r\n      \r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n          <ion-button expand=\"block\" color=\"secondary\" (click)=\"tempDown()\">-</ion-button>\r\n      </ion-col>\r\n      <ion-col>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-item-divider></ion-item-divider>\r\n  \r\n    <ion-row>\r\n      <ion-col></ion-col>\r\n      <ion-col><ion-button expand=\"block\" (click)=\"setSwing()\">SWING<br>LOUVER</ion-button></ion-col>\r\n      <ion-col><ion-button expand=\"block\" (click)=\"setAirFlow()\">AIR FLOW<br>DIRECTION</ion-button></ion-col>\r\n      <ion-col></ion-col>\r\n    </ion-row>\r\n  </ion-col>\r\n  </ion-row>\r\n  </ion-grid>\r\n\r\n</ion-content>\r\n";
+      __webpack_exports__["default"] = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Air conditioner \r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\" >\r\n  <ion-header collapse=\"condense\">\r\n    <ion-toolbar>\r\n      <ion-title size=\"large\">Air conditioner</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  \r\n  <ion-grid id=\"container\" class=\"fondo\">\r\n    <ion-row>\r\n    <ion-col col-xl=\"10\" col-md=\"12\" >\r\n    <ion-row>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button color=\"warning\" expand=\"block\"><ion-icon name=\"power\"></ion-icon > </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <div id=\"screen\">\r\n          <div *ngIf=\"isLoading\"><ion-spinner></ion-spinner></div>\r\n          <div *ngIf=\"!isLoading\" color=\"primary\">\r\n  \r\n            <ion-row class=\"full_height\"> \r\n              <ion-col >\r\n                CLOCK\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row >\r\n              <ion-col class=\"time\">\r\n                <span *ngIf=\"time\">{{ time }}</span>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"bottom_row\">\r\n              <ion-col class=\"bordered mode_list\">\r\n                <div [hidden]=standardMode class=\"standard_mode\">    \r\n                  STANDARD             \r\n                </div>\r\n                <div [hidden]=heatMode class=\"heat_mode\">\r\n                  HEAT\r\n                </div>\r\n                <div [hidden]=coldMode class=\"cold_mode\">\r\n                  COLD\r\n                </div>\r\n              </ion-col>\r\n              <ion-col class=\"bordered no_padding\">\r\n                <ion-row class=\"general_row\">\r\n                  <ion-col>\r\n                    <div *ngIf=\"temp\"><span #temperature>{{ temp }}</span> ºC</div>\r\n                    <div class=\"swing_air\">\r\n                      <div [hidden]=swing class=\"swing\"><ion-icon name=\"swap-vertical-outline\"></ion-icon></div>\r\n                      <div [hidden]=airFlow class=\"air_flow\"><ion-icon name=\"help-buoy-outline\"></ion-icon></div>\r\n                    </div>\r\n                  </ion-col>\r\n                </ion-row>\r\n                <ion-row class=\"setters_row top-border\" >\r\n                  <ion-col class=\"middle-border\" >  \r\n                    <div >-</div>\r\n                  </ion-col>\r\n                  <ion-col>\r\n                    <div >-</div>\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-col>\r\n              <ion-col class=\"bordered\">\r\n                <div> </div>\r\n                <div class=\"fanSpin\">\r\n                  <div><fa-icon [icon]=\"['fas', 'fan']\" transform=\"shrink-6 right-4\"></fa-icon></div>\r\n                  <div><fa-icon [icon]=\"['fas', 'fan']\" transform=\"shrink-4 right-4\"></fa-icon></div>\r\n                  <div><fa-icon [icon]=\"['fas', 'fan']\" transform=\"shrink-2 right-4\"></fa-icon></div>\r\n                  <div><fa-icon [icon]=\"['fas', 'fan']\" transform=\"right-4\"></fa-icon></div>\r\n                </div>\r\n                <div class=\"levels\">\r\n                  <div><fa-icon class=\"fan1\" [icon]=\"['fas', 'ruler-horizontal']\" transform=\"\" [hidden]=fan1></fa-icon></div>\r\n                  <div><fa-icon class=\"fan2\" [icon]=\"['fas', 'ruler-horizontal']\" transform=\"grow-1\" [hidden]=fan2></fa-icon></div>\r\n                  <div><fa-icon class=\"fan3\" [icon]=\"['fas', 'ruler-horizontal']\" transform=\"grow-2\" [hidden]=fan3></fa-icon></div>\r\n                  <div><fa-icon class=\"fan4\" [icon]=\"['fas', 'ruler-horizontal']\" transform=\"grow-3\" [hidden]=fan4></fa-icon></div>\r\n                </div>\r\n              </ion-col>\r\n            </ion-row>\r\n            \r\n            </div>\r\n          </div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>   \r\n        <ion-button expand=\"block\" (click)=\"setMode()\">MODE</ion-button>\r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button expand=\"block\" color=\"danger\" (click)=\"tempUp()\">+</ion-button>  \r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button expand=\"block\" (click)=\"setFanSpeed()\">FAN</ion-button>\r\n      </ion-col>\r\n      \r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n      </ion-col>\r\n      <ion-col>\r\n          <ion-button expand=\"block\" color=\"secondary\" (click)=\"tempDown()\">-</ion-button>\r\n      </ion-col>\r\n      <ion-col>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-item-divider></ion-item-divider>\r\n  \r\n    <ion-row>\r\n      <ion-col></ion-col>\r\n      <ion-col><ion-button expand=\"block\" (click)=\"setSwing()\">SWING<br>LOUVER</ion-button></ion-col>\r\n      <ion-col><ion-button expand=\"block\" (click)=\"setAirFlow()\">AIR FLOW<br>DIRECTION</ion-button></ion-col>\r\n      <ion-col></ion-col>\r\n    </ion-row>\r\n  </ion-col>\r\n  </ion-row>\r\n  </ion-grid>\r\n\r\n</ion-content>\r\n";
       /***/
     },
 
@@ -407,13 +407,19 @@
       var _shared_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ../shared/shared/shared.module */
       "./src/app/shared/shared/shared.module.ts");
+      /* harmony import */
+
+
+      var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @fortawesome/angular-fontawesome */
+      "./node_modules/@fortawesome/angular-fontawesome/__ivy_ngcc__/fesm2015/angular-fontawesome.js");
 
       var HomePageModule = function HomePageModule() {
         _classCallCheck(this, HomePageModule);
       };
 
       HomePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"], _home_routing_module__WEBPACK_IMPORTED_MODULE_6__["HomePageRoutingModule"], _shared_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"]],
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"], _home_routing_module__WEBPACK_IMPORTED_MODULE_6__["HomePageRoutingModule"], _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeModule"], _shared_shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"]],
         declarations: [_home_page__WEBPACK_IMPORTED_MODULE_5__["HomePage"]]
       })], HomePageModule);
       /***/
@@ -435,7 +441,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".fondo {\n  background-color: black;\n}\n\n#container {\n  height: 100%;\n}\n\n#container strong {\n  font-size: 20px;\n  line-height: 26px;\n}\n\n#container p {\n  font-size: 16px;\n  line-height: 22px;\n  color: #8c8c8c;\n  margin: 0;\n}\n\n#container a {\n  text-decoration: none;\n}\n\n#screen {\n  border: 2px solid blue;\n  border-radius: 4px;\n}\n\n.center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100px;\n}\n\n.time {\n  text-align: center;\n  font-size: 25px;\n}\n\n.full_height {\n  height: 100%;\n}\n\n.no_padding {\n  padding: 0;\n}\n\n.bordered {\n  border: 1px solid blue;\n}\n\n.top-border {\n  border-top: 1px solid blue;\n}\n\n.middle-border {\n  border-right: 1px solid blue;\n}\n\n.bottom_row {\n  height: 100px;\n}\n\n.heat {\n  background-color: darkred;\n}\n\n.cold {\n  background-color: darkblue;\n}\n\n.mode_list {\n  height: 100%;\n  padding: 3px;\n}\n\n.standard_mode {\n  display: block;\n  height: 20px;\n  margin: 0px;\n  padding: 0px;\n}\n\n.heat_mode {\n  display: block;\n  height: 20px;\n  margin: 0;\n  margin-top: 18px;\n}\n\n.cold_mode {\n  display: block;\n  height: 20px;\n  margin: 0px;\n  margin-top: 40px;\n}\n\n.general_row {\n  height: auto;\n}\n\n.swing_air div {\n  display: inline-block;\n  margin-left: 1px;\n  margin-right: 1px;\n}\n\n.swing_air .swing {\n  position: absolute;\n  margin-left: 1px;\n}\n\n.swing_air .air_flow {\n  position: absolute;\n  margin-left: 20px;\n}\n\n.setters_row {\n  height: 20px;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 30vh;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxZQUFBO0FBQ0Y7O0FBSUE7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7QUFERjs7QUFJQTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUVBLGNBQUE7RUFFQSxTQUFBO0FBSEY7O0FBTUE7RUFDRSxxQkFBQTtBQUhGOztBQU1BO0VBRUUsc0JBQUE7RUFDQSxrQkFBQTtBQUpGOztBQU9BO0VBQ0UsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxhQUFBO0FBSkY7O0FBT0E7RUFDRSxrQkFBQTtFQUNBLGVBQUE7QUFKRjs7QUFPQTtFQUNFLFlBQUE7QUFKRjs7QUFPQTtFQUNFLFVBQUE7QUFKRjs7QUFPQTtFQUNFLHNCQUFBO0FBSkY7O0FBT0E7RUFDRSwwQkFBQTtBQUpGOztBQU1BO0VBQ0UsNEJBQUE7QUFIRjs7QUFNQTtFQUNFLGFBQUE7QUFIRjs7QUFNQTtFQUNFLHlCQUFBO0FBSEY7O0FBTUE7RUFDRSwwQkFBQTtBQUhGOztBQU1BO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUFIRjs7QUFNQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUFIRjs7QUFLQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGdCQUFBO0FBRkY7O0FBSUE7RUFDRSxjQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQURGOztBQUlBO0VBQ0UsWUFBQTtBQURGOztBQUlBO0VBQ0UscUJBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FBREY7O0FBSUE7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0FBREY7O0FBSUE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FBREY7O0FBSUE7RUFDRSxZQUFBO0VBQ0Esd0JBQUE7RUFBQSxnQkFBQTtFQUNBLFNBQUE7QUFERiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZm9uZG8ge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbn1cblxuI2NvbnRhaW5lciB7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuXG5cbiNjb250YWluZXIgc3Ryb25nIHtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBsaW5lLWhlaWdodDogMjZweDtcbn1cblxuI2NvbnRhaW5lciBwIHtcbiAgZm9udC1zaXplOiAxNnB4O1xuICBsaW5lLWhlaWdodDogMjJweDtcblxuICBjb2xvcjogIzhjOGM4YztcblxuICBtYXJnaW46IDA7XG59XG5cbiNjb250YWluZXIgYSB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cblxuI3NjcmVlbiB7XG4gIC8vbWluLWhlaWdodDogMjAwcHg7XG4gIGJvcmRlcjoycHggc29saWQgYmx1ZTtcbiAgYm9yZGVyLXJhZGl1czo0cHg7XG59XG5cbi5jZW50ZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgaGVpZ2h0OiAxMDBweDtcbn1cblxuLnRpbWUge1xuICB0ZXh0LWFsaWduOmNlbnRlcjtcbiAgZm9udC1zaXplOiAyNXB4O1xufVxuXG4uZnVsbF9oZWlnaHQge1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi5ub19wYWRkaW5nIHtcbiAgcGFkZGluZzogMDtcbn1cblxuLmJvcmRlcmVkIHtcbiAgYm9yZGVyOjFweCBzb2xpZCBibHVlO1xufVxuXG4udG9wLWJvcmRlciB7XG4gIGJvcmRlci10b3A6MXB4IHNvbGlkIGJsdWU7XG59XG4ubWlkZGxlLWJvcmRlciB7XG4gIGJvcmRlci1yaWdodDoxcHggc29saWQgYmx1ZTtcbn1cblxuLmJvdHRvbV9yb3d7XG4gIGhlaWdodDogMTAwcHg7XG59XG5cbi5oZWF0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogZGFya3JlZDtcbn1cblxuLmNvbGQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrYmx1ZTtcbn1cblxuLm1vZGVfbGlzdHtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nOjNweDtcbn1cblxuLnN0YW5kYXJkX21vZGUge1xuICBkaXNwbGF5OiBibG9jaztcbiAgaGVpZ2h0OiAyMHB4O1xuICBtYXJnaW46IDBweDtcbiAgcGFkZGluZzogMHB4O1xufVxuLmhlYXRfbW9kZXtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGhlaWdodDogMjBweDtcbiAgbWFyZ2luOjA7XG4gIG1hcmdpbi10b3A6MThweDtcbn1cbi5jb2xkX21vZGV7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBoZWlnaHQ6IDIwcHg7XG4gIG1hcmdpbjowcHg7XG4gIG1hcmdpbi10b3A6NDBweDtcbn1cblxuLmdlbmVyYWxfcm93e1xuICBoZWlnaHQ6IGF1dG87XG59XG5cbi5zd2luZ19haXIgZGl2e1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIG1hcmdpbi1sZWZ0OjFweDtcbiAgbWFyZ2luLXJpZ2h0OiAxcHg7XG59XG5cbi5zd2luZ19haXIgLnN3aW5nIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBtYXJnaW4tbGVmdDogMXB4O1xufVxuXG4uc3dpbmdfYWlyIC5haXJfZmxvd3tcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBtYXJnaW4tbGVmdDogMjBweDtcbn1cblxuLnNldHRlcnNfcm93e1xuICBoZWlnaHQ6IDIwcHg7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG4gIHRvcDogMzB2aDtcbn1cbiJdfQ== */";
+      __webpack_exports__["default"] = ".fondo {\n  background-color: black;\n}\n\n#container {\n  height: 100%;\n}\n\n#container strong {\n  font-size: 20px;\n  line-height: 26px;\n}\n\n#container p {\n  font-size: 16px;\n  line-height: 22px;\n  color: #8c8c8c;\n  margin: 0;\n}\n\n#container a {\n  text-decoration: none;\n}\n\n#screen {\n  border: 2px solid blue;\n  border-radius: 4px;\n}\n\n.center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100px;\n}\n\n.time {\n  text-align: center;\n  font-size: 25px;\n}\n\n.full_height {\n  height: 100%;\n}\n\n.no_padding {\n  padding: 0;\n}\n\n.bordered {\n  border: 1px solid blue;\n}\n\n.top-border {\n  border-top: 1px solid blue;\n}\n\n.middle-border {\n  border-right: 1px solid blue;\n}\n\n.bottom_row {\n  height: 100px;\n}\n\n.heat {\n  background-color: darkred;\n}\n\n.cold {\n  background-color: darkblue;\n}\n\n.mode_list {\n  height: 100%;\n  padding: 3px;\n}\n\n.standard_mode {\n  display: block;\n  height: 20px;\n  margin: 0px;\n  padding: 0px;\n}\n\n.heat_mode {\n  display: block;\n  height: 20px;\n  margin: 0;\n  margin-top: 18px;\n}\n\n.cold_mode {\n  display: block;\n  height: 20px;\n  margin: 0px;\n  margin-top: 40px;\n}\n\n.general_row {\n  height: auto;\n}\n\n.swing_air div {\n  display: inline-block;\n  margin-left: 1px;\n  margin-right: 1px;\n}\n\n.swing_air .swing {\n  position: absolute;\n  margin-left: 1px;\n}\n\n.swing_air .air_flow {\n  position: absolute;\n  margin-left: 20px;\n}\n\n.setters_row {\n  height: 20px;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 33vh;\n}\n\n.fanSpin {\n  margin-top: 5px;\n}\n\n.fanSpin div {\n  display: inline-block;\n  margin-left: 4px;\n  margin-right: 4px;\n}\n\n.levels div {\n  display: inline-block;\n  margin-left: 3px;\n  margin-right: 4px;\n}\n\n.levels div .fan1 {\n  position: absolute;\n  margin-left: 0px;\n}\n\n.levels div .fan2 {\n  position: absolute;\n  margin-left: 20px;\n}\n\n.levels div .fan3 {\n  position: absolute;\n  margin-left: 40px;\n}\n\n.levels div .fan4 {\n  position: absolute;\n  margin-left: 60px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUFBO0FBQ0Y7O0FBRUE7RUFDRSxZQUFBO0FBQ0Y7O0FBSUE7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7QUFERjs7QUFJQTtFQUNFLGVBQUE7RUFDQSxpQkFBQTtFQUVBLGNBQUE7RUFFQSxTQUFBO0FBSEY7O0FBTUE7RUFDRSxxQkFBQTtBQUhGOztBQU1BO0VBRUUsc0JBQUE7RUFDQSxrQkFBQTtBQUpGOztBQU9BO0VBQ0UsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsbUJBQUE7RUFDQSxhQUFBO0FBSkY7O0FBT0E7RUFDRSxrQkFBQTtFQUNBLGVBQUE7QUFKRjs7QUFPQTtFQUNFLFlBQUE7QUFKRjs7QUFPQTtFQUNFLFVBQUE7QUFKRjs7QUFPQTtFQUNFLHNCQUFBO0FBSkY7O0FBT0E7RUFDRSwwQkFBQTtBQUpGOztBQU1BO0VBQ0UsNEJBQUE7QUFIRjs7QUFNQTtFQUNFLGFBQUE7QUFIRjs7QUFNQTtFQUNFLHlCQUFBO0FBSEY7O0FBTUE7RUFDRSwwQkFBQTtBQUhGOztBQU1BO0VBQ0UsWUFBQTtFQUNBLFlBQUE7QUFIRjs7QUFNQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUFIRjs7QUFLQTtFQUNFLGNBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGdCQUFBO0FBRkY7O0FBSUE7RUFDRSxjQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQURGOztBQUlBO0VBQ0UsWUFBQTtBQURGOztBQUlBO0VBQ0UscUJBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FBREY7O0FBSUE7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0FBREY7O0FBSUE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FBREY7O0FBSUE7RUFDRSxZQUFBO0VBQ0Esd0JBQUE7RUFBQSxnQkFBQTtFQUNBLFNBQUE7QUFERjs7QUFJQTtFQUNFLGVBQUE7QUFERjs7QUFJQTtFQUNFLHFCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxpQkFBQTtBQURGOztBQUlBO0VBQ0UscUJBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FBREY7O0FBSUE7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0FBREY7O0FBR0E7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FBQUY7O0FBRUE7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FBQ0Y7O0FBQ0E7RUFDRSxrQkFBQTtFQUNBLGlCQUFBO0FBRUYiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvbmRvIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxufVxyXG5cclxuI2NvbnRhaW5lciB7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG5cclxuXHJcbiNjb250YWluZXIgc3Ryb25nIHtcclxuICBmb250LXNpemU6IDIwcHg7XHJcbiAgbGluZS1oZWlnaHQ6IDI2cHg7XHJcbn1cclxuXHJcbiNjb250YWluZXIgcCB7XHJcbiAgZm9udC1zaXplOiAxNnB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyMnB4O1xyXG5cclxuICBjb2xvcjogIzhjOGM4YztcclxuXHJcbiAgbWFyZ2luOiAwO1xyXG59XHJcblxyXG4jY29udGFpbmVyIGEge1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxufVxyXG5cclxuI3NjcmVlbiB7XHJcbiAgLy9taW4taGVpZ2h0OiAyMDBweDtcclxuICBib3JkZXI6MnB4IHNvbGlkIGJsdWU7XHJcbiAgYm9yZGVyLXJhZGl1czo0cHg7XHJcbn1cclxuXHJcbi5jZW50ZXIge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBoZWlnaHQ6IDEwMHB4O1xyXG59XHJcblxyXG4udGltZSB7XHJcbiAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgZm9udC1zaXplOiAyNXB4O1xyXG59XHJcblxyXG4uZnVsbF9oZWlnaHQge1xyXG4gIGhlaWdodDogMTAwJTtcclxufVxyXG5cclxuLm5vX3BhZGRpbmcge1xyXG4gIHBhZGRpbmc6IDA7XHJcbn1cclxuXHJcbi5ib3JkZXJlZCB7XHJcbiAgYm9yZGVyOjFweCBzb2xpZCBibHVlO1xyXG59XHJcblxyXG4udG9wLWJvcmRlciB7XHJcbiAgYm9yZGVyLXRvcDoxcHggc29saWQgYmx1ZTtcclxufVxyXG4ubWlkZGxlLWJvcmRlciB7XHJcbiAgYm9yZGVyLXJpZ2h0OjFweCBzb2xpZCBibHVlO1xyXG59XHJcblxyXG4uYm90dG9tX3Jvd3tcclxuICBoZWlnaHQ6IDEwMHB4O1xyXG59XHJcblxyXG4uaGVhdCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogZGFya3JlZDtcclxufVxyXG5cclxuLmNvbGQge1xyXG4gIGJhY2tncm91bmQtY29sb3I6IGRhcmtibHVlO1xyXG59XHJcblxyXG4ubW9kZV9saXN0e1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBwYWRkaW5nOjNweDtcclxufVxyXG5cclxuLnN0YW5kYXJkX21vZGUge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIGhlaWdodDogMjBweDtcclxuICBtYXJnaW46IDBweDtcclxuICBwYWRkaW5nOiAwcHg7XHJcbn1cclxuLmhlYXRfbW9kZXtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBoZWlnaHQ6IDIwcHg7XHJcbiAgbWFyZ2luOjA7XHJcbiAgbWFyZ2luLXRvcDoxOHB4O1xyXG59XHJcbi5jb2xkX21vZGV7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgaGVpZ2h0OiAyMHB4O1xyXG4gIG1hcmdpbjowcHg7XHJcbiAgbWFyZ2luLXRvcDo0MHB4O1xyXG59XHJcblxyXG4uZ2VuZXJhbF9yb3d7XHJcbiAgaGVpZ2h0OiBhdXRvO1xyXG59XHJcblxyXG4uc3dpbmdfYWlyIGRpdntcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6MXB4O1xyXG4gIG1hcmdpbi1yaWdodDogMXB4O1xyXG59XHJcblxyXG4uc3dpbmdfYWlyIC5zd2luZyB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIG1hcmdpbi1sZWZ0OiAxcHg7XHJcbn1cclxuXHJcbi5zd2luZ19haXIgLmFpcl9mbG93e1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBtYXJnaW4tbGVmdDogMjBweDtcclxufVxyXG5cclxuLnNldHRlcnNfcm93e1xyXG4gIGhlaWdodDogMjBweDtcclxuICBwb3NpdGlvbjogc3RpY2t5O1xyXG4gIHRvcDogMzN2aDtcclxufVxyXG5cclxuLmZhblNwaW4ge1xyXG4gIG1hcmdpbi10b3A6IDVweDtcclxufVxyXG5cclxuLmZhblNwaW4gZGl2e1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICBtYXJnaW4tbGVmdDogNHB4O1xyXG4gIG1hcmdpbi1yaWdodDogNHB4O1xyXG59XHJcblxyXG4ubGV2ZWxzIGRpdntcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6IDNweDtcclxuICBtYXJnaW4tcmlnaHQ6IDRweDtcclxufVxyXG5cclxuLmxldmVscyBkaXYgLmZhbjF7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIG1hcmdpbi1sZWZ0OiAwcHg7XHJcbn1cclxuLmxldmVscyBkaXYgLmZhbjJ7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xyXG59XHJcbi5sZXZlbHMgZGl2IC5mYW4ze1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBtYXJnaW4tbGVmdDogNDBweDtcclxufVxyXG4ubGV2ZWxzIGRpdiAuZmFuNHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgbWFyZ2luLWxlZnQ6IDYwcHg7XHJcbn1cclxuIl19 */";
       /***/
     },
 
@@ -504,15 +510,20 @@
           this.updatedData = [];
           this.time = '00:00';
           this.temp = 0;
-          this.Mode = ['Heat', 'Cold', 'Standard']; //modes
+          this.Mode = ['Heat', 'Cold', 'Standard']; // modes
 
-          this.fan = []; //hide div = boolean
+          this.fan = []; // hide div = boolean
 
-          this.standard_mode = true;
-          this.heat_mode = true;
-          this.cold_mode = true;
+          this.standardMode = true;
+          this.heatMode = true;
+          this.coldMode = true;
           this.swing = true;
-          this.air_flow = true;
+          this.airFlow = true;
+          this.fanSpeed = 1;
+          this.fan1 = true;
+          this.fan2 = true;
+          this.fan3 = true;
+          this.fan4 = true;
           this.isLoading = true;
           this.airData = this.httpClient.get('https://run.mocky.io/v3/967ef4af-4739-480e-96ca-239888d65b9f');
           this.airData.subscribe(function (response) {
@@ -526,6 +537,8 @@
             _this.setTemp();
 
             _this.setMode();
+
+            _this.setFanSpeed();
           });
         }
 
@@ -583,82 +596,87 @@
         }, {
           key: "setMode",
           value: function setMode() {
-            var mode_i;
-            mode_i = this.mode_index;
-            console.log("mode value:" + mode_i);
+            var modeIndex;
+            modeIndex = this.modeIndex;
+            console.log('mode value:' + modeIndex);
 
-            if (isNaN(mode_i)) {
-              mode_i = 0;
+            if (isNaN(modeIndex)) {
+              modeIndex = 0;
             }
 
-            if (mode_i > 2) {
-              mode_i = 0;
+            if (modeIndex > 2) {
+              modeIndex = 0;
             }
 
-            console.log("mode value:" + mode_i);
+            console.log('mode value:' + modeIndex);
 
-            switch (mode_i) {
+            switch (modeIndex) {
               case 0:
-                this.standard_mode = false;
-                this.heat_mode = true;
-                this.cold_mode = true;
+                this.standardMode = false;
+                this.heatMode = true;
+                this.coldMode = true;
                 break;
 
               case 1:
-                this.standard_mode = true;
-                this.heat_mode = false;
-                this.cold_mode = true;
+                this.standardMode = true;
+                this.heatMode = false;
+                this.coldMode = true;
                 break;
 
               case 2:
-                this.standard_mode = true;
-                this.heat_mode = true;
-                this.cold_mode = false;
+                this.standardMode = true;
+                this.heatMode = true;
+                this.coldMode = false;
                 break;
             }
 
-            mode_i++;
-            this.mode_index = mode_i;
+            modeIndex++;
+            this.modeIndex = modeIndex;
           }
         }, {
-          key: "setFan",
-          value: function setFan() {
-            var mode_i;
-            mode_i = this.mode_index;
-            console.log("mode value:" + mode_i);
+          key: "setFanSpeed",
+          value: function setFanSpeed() {
+            var fanActualSpeed;
+            fanActualSpeed = this.fanSpeed;
 
-            if (isNaN(mode_i)) {
-              mode_i = 0;
+            if (fanActualSpeed === 5) {
+              fanActualSpeed = 1;
             }
 
-            if (mode_i > 2) {
-              mode_i = 0;
-            }
+            console.log('fan speed: ' + fanActualSpeed);
 
-            console.log("mode value:" + mode_i);
-
-            switch (mode_i) {
-              case 0:
-                this.standard_mode = false;
-                this.heat_mode = true;
-                this.cold_mode = true;
-                break;
-
+            switch (fanActualSpeed) {
               case 1:
-                this.standard_mode = true;
-                this.heat_mode = false;
-                this.cold_mode = true;
+                this.fan1 = false;
+                this.fan2 = true;
+                this.fan3 = true;
+                this.fan4 = true;
                 break;
 
               case 2:
-                this.standard_mode = true;
-                this.heat_mode = true;
-                this.cold_mode = false;
+                this.fan1 = false;
+                this.fan2 = false;
+                this.fan3 = true;
+                this.fan4 = true;
+                break;
+
+              case 3:
+                this.fan1 = false;
+                this.fan2 = false;
+                this.fan3 = false;
+                this.fan4 = true;
+                break;
+
+              case 4:
+                this.fan1 = false;
+                this.fan2 = false;
+                this.fan3 = false;
+                this.fan4 = false;
                 break;
             }
 
-            mode_i++;
-            this.mode_index = mode_i;
+            fanActualSpeed++;
+            this.fanSpeed = fanActualSpeed;
           }
         }, {
           key: "setSwing",
@@ -674,13 +692,13 @@
         }, {
           key: "setAirFlow",
           value: function setAirFlow() {
-            if (this.air_flow) {
-              this.air_flow = false;
+            if (this.airFlow) {
+              this.airFlow = false;
             } else {
-              this.air_flow = true;
+              this.airFlow = true;
             }
 
-            console.log('air flow: ' + this.air_flow);
+            console.log('air flow: ' + this.airFlow);
           }
         }, {
           key: "getState",
