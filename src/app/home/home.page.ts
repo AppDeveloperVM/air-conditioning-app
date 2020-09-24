@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
 import { AirDataService } from '../services/air-data.service';
 import { AirConditioner } from './models/air-conditioner.model';
-import { map, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -257,9 +256,14 @@ export class HomePage implements OnInit, OnDestroy{
 
   updateStatus() {
 
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json' );
+    //const headers = new Headers();
+    var header = { "headers": 
+      {
+      'Access-Control-Request-Method': 'POST', 
+      'Access-Control-Request-Headers': 'Content-Type',
+      'Content-Type' : 'text/html'
+      } 
+    };
 
     const postData = {
       time: this.updatedData.time,
@@ -274,12 +278,8 @@ export class HomePage implements OnInit, OnDestroy{
     this.httpClient.post(
       this.deviceUrl,
       postData,
-      { headers:
-        {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-        }
-      }
+      header
+      
     )
     .subscribe(data => {
       console.log('Updated data send!');
