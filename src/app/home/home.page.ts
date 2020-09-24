@@ -259,9 +259,11 @@ export class HomePage implements OnInit, OnDestroy{
     //const headers = new Headers();
     var header = { "headers": 
       {
-      'Access-Control-Request-Method': 'POST', 
-      'Access-Control-Request-Headers': 'Content-Type',
-      'Content-Type' : 'text/html'
+      //'Access-Control-Request-Method': 'POST', 
+      //'Access-Control-Request-Headers': 'Content-Type',
+      'Content-Type' :'application/x-www-form-urlencoded',
+      'Accept': 'text/html'
+      //'Charset': 'UTF-8'
       } 
     };
 
@@ -282,8 +284,8 @@ export class HomePage implements OnInit, OnDestroy{
       
     )
     .subscribe(data => {
-      console.log('Updated data send!');
-      console.log(data['_body']);
+      console.log('Updated data send!', data);
+      //console.log(data['_body']);
     }, error => {
         console.log(error);
     });
