@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
 import { AirDataService } from '../services/air-data.service';
@@ -33,7 +33,7 @@ export class HomePage implements OnInit, OnDestroy{
   temp = 0;
   mode: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
   fan: any = ['AUTO', 'HIGH', 'MED', 'LOW', 'QUIET'];
-  powerOn = true;
+  powerOn = false;
 
   modeIndex: number;
   // hide div = boolean
@@ -105,12 +105,23 @@ export class HomePage implements OnInit, OnDestroy{
     console.log('updatedData:' , this.updatedData);
     this.time = this.updatedData.time;
     this.temp = this.updatedData.temp;
-    this.modeIndex = 0; // this.updatedData.masterCtrl;
+    this.modeIndex = 0; // 
     this.mode = 0; // this.mode[this.modeIndex];
+    this.updatedData.mode = 0;
     this.fanSpeed = 2; // this.updatedData.fanCtrl;
+    this.updatedData.fanSpeed = 1;
     this.swing = this.updatedData.swing;
     this.airFlow = this.updatedData.airFlow;
     this.powerOn = this.updatedData.powerOn;
+  }
+
+  powerMode() {
+    if (this.powerOn){
+      this.powerOn = false;
+    } else {
+      this.powerOn = true;
+    }
+    this.updateStatus();
   }
 
   initMode(){
@@ -122,7 +133,7 @@ export class HomePage implements OnInit, OnDestroy{
     if (modeIndex > 2){
       modeIndex = 0;
     }
-    this.setMode(modeIndex);
+    this.setModeIcon(modeIndex);
   }
 
   changeMode(){
@@ -136,12 +147,15 @@ export class HomePage implements OnInit, OnDestroy{
       modeIndex = 0;
     }
     this.modeIndex = modeIndex;
+    this.updatedData.mode = modeIndex;
     // this.mode = this.mode[this.modeIndex];
     console.log('mode value:' + modeIndex);
-    this.setMode(modeIndex);
+    this.setModeIcon(modeIndex);
+
+    this.updateStatus();
   }
 
-  setMode(modeIndex){
+  setModeIcon(modeIndex){
     switch (modeIndex){
       case 0:
         this.standardMode = false;
@@ -168,7 +182,7 @@ export class HomePage implements OnInit, OnDestroy{
       fanActualSpeed = 1;
     }
     console.log('fan speed: ' + fanActualSpeed);
-    this.setFanSpeed(fanActualSpeed);
+    this.setFanSpeedIcon(fanActualSpeed);
   }
 
   changeFanSpeed(){
@@ -180,13 +194,14 @@ export class HomePage implements OnInit, OnDestroy{
     }
     console.log('fan speed: ' + fanActualSpeed);
 
-    this.updatedData.fanCtrl = fanActualSpeed;
+    this.updatedData.fanSpeed = fanActualSpeed;
     this.fanSpeed = fanActualSpeed;
 
-    this.setFanSpeed(fanActualSpeed);
+    this.setFanSpeedIcon(fanActualSpeed);
+    this.updateStatus();
   }
 
-  setFanSpeed(fanSpeed){
+  setFanSpeedIcon(fanSpeed){
     switch (fanSpeed){
       case 1:
         this.fan1 = false;
@@ -223,6 +238,7 @@ export class HomePage implements OnInit, OnDestroy{
     }
     this.updatedData.swing = this.swing;
     console.log('swing: ' + this.swing);
+    this.updateStatus();
   }
 
   setAirFlow(){
@@ -234,6 +250,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.airflow = this.airFlow;
     console.log('status:', this.updatedData);
     console.log('air flow: ' + this.airFlow);
+    this.updateStatus();
   }
 
   tempUp(){
@@ -252,22 +269,27 @@ export class HomePage implements OnInit, OnDestroy{
     newTemp = this.temp--;
     this.updatedData.temp = newTemp;
     console.log('temp:' + newTemp);
+
+    this.updateStatus();
   }
 
   updateStatus() {
 
     //const headers = new Headers();
-    var header = { "headers": 
+    var options = { "headers": 
       {
       //'Access-Control-Request-Method': 'POST', 
       //'Access-Control-Request-Headers': 'Content-Type',
-      'Content-Type' :'application/x-www-form-urlencoded',
-      'Accept': 'text/html'
+      //'Content-Type' :'text/json',
+      //'Accept': 'text/html'
       //'Charset': 'UTF-8'
       } 
     };
 
-    const postData = {
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Request-Method','POST');
+
+    /*const postData = {
       time: this.updatedData.time,
       temp: this.updatedData.temp,
       masterCtrl: this.updatedData.mode,
@@ -275,13 +297,22 @@ export class HomePage implements OnInit, OnDestroy{
       powerOn: 'ON',
       swing: this.updatedData.swing ? true : false,
       air_direction: 1
-    };
+    };*/
+    
+    //&powerOn=${this.powerOn ? 'ON' : 'OFF'}
+    //const power_var = this.powerOn ? '&powerOn=ON' : '';
+
+    const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.mode}&fanCtrl=${this.updatedData.fanSpeed}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1"`;
+    console.log(postData);
 
     this.httpClient.post(
       this.deviceUrl,
       postData,
-      header
-      
+      { 
+        headers: headers,
+        observe: 'body',
+        responseType: 'text'
+      }
     )
     .subscribe(data => {
       console.log('Updated data send!', data);
