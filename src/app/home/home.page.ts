@@ -14,10 +14,13 @@ import { AirConditioner } from './models/air-conditioner.model';
 export class HomePage implements OnInit, OnDestroy{
 
   // testing API
-  API = 'https://ddae5242-5a5a-4ba9-b9c6-9e2bcb433d93.mock.pstmn.io';
+  API = 'https://run.mocky.io/v3/dae97270-1414-498a-8d2b-f211a83a4953';
 
   // real url
   deviceUrl = 'http://85.57.77.218:350/';
+
+  // enable / disable sending data
+  sendDataEnabled = false;
 
   device: AirConditioner;
   brand: string;
@@ -31,7 +34,8 @@ export class HomePage implements OnInit, OnDestroy{
 
   time = '00:00';
   temp = 0;
-  mode: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
+  //masterCtrl
+  masterCtrl: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
   fan: any = ['AUTO', 'HIGH', 'MED', 'LOW', 'QUIET'];
   powerOn = false;
 
@@ -43,7 +47,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   swing = true;
   airFlow = true;
-  fanSpeed: number;
+  fanCtrl: number;
 
   fan1 = true;
   fan2 = true;
@@ -106,10 +110,10 @@ export class HomePage implements OnInit, OnDestroy{
     this.time = this.updatedData.time;
     this.temp = this.updatedData.temp;
     this.modeIndex = 0; // 
-    this.mode = 0; // this.mode[this.modeIndex];
-    this.updatedData.mode = 0;
-    this.fanSpeed = 2; // this.updatedData.fanCtrl;
-    this.updatedData.fanSpeed = 1;
+    this.masterCtrl = 0; // this.masterCtrl[this.modeIndex];
+    this.updatedData.masterCtrl = 0;
+    this.fanCtrl = 2; // this.updatedData.fanCtrl;
+    this.updatedData.fanCtrl = 1;
     this.swing = this.updatedData.swing;
     this.airFlow = this.updatedData.airFlow;
     this.powerOn = this.updatedData.powerOn;
@@ -121,7 +125,7 @@ export class HomePage implements OnInit, OnDestroy{
     } else {
       this.powerOn = true;
     }
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
   initMode(){
@@ -147,12 +151,12 @@ export class HomePage implements OnInit, OnDestroy{
       modeIndex = 0;
     }
     this.modeIndex = modeIndex;
-    this.updatedData.mode = modeIndex;
-    // this.mode = this.mode[this.modeIndex];
-    console.log('mode value:' + modeIndex);
+    this.updatedData.masterCtrl = modeIndex;
+    // this.masterCtrl = this.masterCtrl[this.modeIndex];
+    console.log('masterCtrl value:' + modeIndex);
     this.setModeIcon(modeIndex);
 
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
   setModeIcon(modeIndex){
@@ -177,32 +181,32 @@ export class HomePage implements OnInit, OnDestroy{
 
   initFanSpeed(){
     let fanActualSpeed;
-    fanActualSpeed = this.fanSpeed;
+    fanActualSpeed = this.fanCtrl;
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
-    console.log('fan speed: ' + fanActualSpeed);
+    console.log('fan control speed: ' + fanActualSpeed);
     this.setFanSpeedIcon(fanActualSpeed);
   }
 
   changeFanSpeed(){
     let fanActualSpeed;
-    fanActualSpeed = this.fanSpeed;
+    fanActualSpeed = this.fanCtrl;
     fanActualSpeed++;
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
     console.log('fan speed: ' + fanActualSpeed);
 
-    this.updatedData.fanSpeed = fanActualSpeed;
-    this.fanSpeed = fanActualSpeed;
+    this.updatedData.fanCtrl = fanActualSpeed;
+    this.fanCtrl = fanActualSpeed;
 
     this.setFanSpeedIcon(fanActualSpeed);
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
-  setFanSpeedIcon(fanSpeed){
-    switch (fanSpeed){
+  setFanSpeedIcon(fanCtrl){
+    switch (fanCtrl){
       case 1:
         this.fan1 = false;
         this.fan2 = true;
@@ -238,7 +242,7 @@ export class HomePage implements OnInit, OnDestroy{
     }
     this.updatedData.swing = this.swing;
     console.log('swing: ' + this.swing);
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
   setAirFlow(){
@@ -250,7 +254,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.airflow = this.airFlow;
     console.log('status:', this.updatedData);
     console.log('air flow: ' + this.airFlow);
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
   tempUp(){
@@ -260,7 +264,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.temp = newTemp;
     console.log('temp:' + newTemp);
 
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
   tempDown() {
@@ -270,10 +274,10 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.temp = newTemp;
     console.log('temp:' + newTemp);
 
-    this.updateStatus();
+    this.updateDeviceStatus();
   }
 
-  updateStatus() {
+  updateDeviceStatus() {
 
     //const headers = new Headers();
     var options = { "headers": 
@@ -292,8 +296,8 @@ export class HomePage implements OnInit, OnDestroy{
     /*const postData = {
       time: this.updatedData.time,
       temp: this.updatedData.temp,
-      masterCtrl: this.updatedData.mode,
-      fanCtrl: this.updatedData.fanSpeed,
+      masterCtrl: this.updatedData.masterCtrl,
+      fanCtrl: this.updatedData.fanCtrl,
       powerOn: 'ON',
       swing: this.updatedData.swing ? true : false,
       air_direction: 1
@@ -302,24 +306,29 @@ export class HomePage implements OnInit, OnDestroy{
     //&powerOn=${this.powerOn ? 'ON' : 'OFF'}
     //const power_var = this.powerOn ? '&powerOn=ON' : '';
 
-    const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.mode}&fanCtrl=${this.updatedData.fanSpeed}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1"`;
+    const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.masterCtrl}&fanCtrl=${this.updatedData.fanCtrl}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1`;
     console.log(postData);
 
-    this.httpClient.post(
-      this.deviceUrl,
-      postData,
-      { 
-        headers: headers,
-        observe: 'body',
-        responseType: 'text'
-      }
-    )
-    .subscribe(data => {
-      console.log('Updated data send!', data);
-      //console.log(data['_body']);
-    }, error => {
-        console.log(error);
-    });
+    if ( this.sendDataEnabled ){
+      this.httpClient.post(
+        this.deviceUrl,
+        postData,
+        { 
+          headers: headers,
+          observe: 'body',
+          responseType: 'text'
+        }
+      )
+      .subscribe(data => {
+        console.log('Updated data send!', data);
+        //console.log(data['_body']);
+      }, error => {
+          console.log(error);
+      });
+    } else {
+      console.log("SendData not enabled");
+    }
+
   }
 
   ngOnDestroy() {
