@@ -188,7 +188,7 @@ export class HomePage implements OnInit, OnDestroy{
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
-    console.log('fan control speed: ' + fanActualSpeed);
+    //console.log('fan control speed: ' + fanActualSpeed);
     this.setFanSpeedIcon(fanActualSpeed);
   }
 
@@ -269,7 +269,6 @@ export class HomePage implements OnInit, OnDestroy{
     this.airDirection = actualAirDirection;
 
     this.updatedData.airflow = this.airFlow;
-    console.log('status:', this.updatedData);
     console.log('air flow: ' + this.airFlow);
     this.updateDeviceStatus();
   }
@@ -300,10 +299,12 @@ export class HomePage implements OnInit, OnDestroy{
     //get values from this.updatedData array and transform it to binary string
     let binaryString = "";
     let temp_binary = "";
+    let temp_binary_reversed = "";
 
     //ejemplo : temperatura to binary y luego se invierte, de derecha a izquierda
     temp_binary = (+this.updatedData.temp).toString(2);
-    console.log("temp in binary : " + temp_binary);
+    temp_binary_reversed = temp_binary.split("").reverse().join("");
+    console.log("temp in binary : " + temp_binary + ",reversed: " + temp_binary_reversed);
   }
 
   updateDeviceStatus() {
@@ -352,7 +353,6 @@ export class HomePage implements OnInit, OnDestroy{
       )
       .subscribe(data => {
         console.log('Updated data send!', data);
-        //console.log(data['_body']);
       }, error => {
           console.log(error);
       });
