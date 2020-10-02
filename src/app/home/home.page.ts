@@ -36,6 +36,7 @@ export class HomePage implements OnInit, OnDestroy{
   temp = 0;
   //masterCtrl
   masterCtrl: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
+  fanIndex = 0;
   fan: any = ['AUTO', 'HIGH', 'MED', 'LOW', 'QUIET'];
   powerOn = false;
 
@@ -112,9 +113,9 @@ export class HomePage implements OnInit, OnDestroy{
     this.time = this.updatedData.time;
     this.temp = this.updatedData.temp;
     this.modeIndex = 0; // 
-    this.masterCtrl = 0; // this.masterCtrl[this.modeIndex];
+    this.masterCtrl = 0; // this.masterCtrl.indexOf(this.updatedData.modeIndex);
     this.updatedData.masterCtrl = 0;
-    this.fanCtrl = 2; // this.updatedData.fanCtrl;
+    this.fanCtrl = 2; // this.fan.indexOf(this.updatedData.fanCtrl);
     this.updatedData.fanCtrl = 1;
     this.swing = this.updatedData.swing;
     this.airFlow = this.updatedData.airFlow;
@@ -295,6 +296,16 @@ export class HomePage implements OnInit, OnDestroy{
     this.updateDeviceStatus();
   }
 
+  toBinaryCode(){
+    //get values from this.updatedData array and transform it to binary string
+    let binaryString = "";
+    let temp_binary = "";
+
+    //ejemplo : temperatura to binary y luego se invierte, de derecha a izquierda
+    temp_binary = (+this.updatedData.temp).toString(2);
+    console.log("temp in binary : " + temp_binary);
+  }
+
   updateDeviceStatus() {
 
     //const headers = new Headers();
@@ -326,6 +337,8 @@ export class HomePage implements OnInit, OnDestroy{
 
     const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.masterCtrl}&fanCtrl=${this.updatedData.fanCtrl}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1`;
     console.log(postData);
+
+    this.toBinaryCode();
 
     if ( this.sendDataEnabled ){
       this.httpClient.post(
