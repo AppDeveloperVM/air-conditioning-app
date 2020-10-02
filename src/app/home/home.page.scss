@@ -32,6 +32,26 @@
   border-radius:4px;
 }
 
+#power_state{
+  display: inline-block;
+}
+
+#power_state #icon ion-icon{
+  position: absolute;
+}
+
+.red {
+  color:red;
+}
+
+.green {
+  color:green;
+}
+
+#power_state .text {
+  margin-left: 20px;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -127,18 +147,42 @@
   vertical-align: middle;
 }
 
-.swing_air .air_direction .line {
-  position: relative;
-  font-size: 15px;
-  line-height: 2px;
+.swing_air .air_direction hr {
+  width: 14px;
   color:white;
+  height: 2px;
+  margin:0;
+  margin-bottom:3px;
+  border:1px solid white;
 }
 
 .swing_air .air_direction #line_2 {
-  transform: rotate(-20deg);
+  transform-origin: 0px -4px;
+  transform: rotate(-12deg);
 }
 .swing_air .air_direction #line_3 {
-  transform: rotate(-40deg);
+  transform-origin: 0px -8px;
+  transform: rotate(-22deg);
+}
+.swing_air .air_direction #line_4 {
+  transform-origin: 0px -11px;
+  transform: rotate(-36deg);
+}
+
+hr.line.actual_direction{
+  background-color: white;
+}
+
+.swing_air .air_device {
+  margin-left: 80px;
+  width: 20px;
+  position: absolute;
+  height: 10px;
+  bottom: 2px;
+}
+
+.swing_air .air_device ion-icon{
+  font-size: 20px;
 }
 
 .setters_row{

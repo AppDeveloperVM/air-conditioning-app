@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
@@ -47,6 +47,8 @@ export class HomePage implements OnInit, OnDestroy{
 
   swing = true;
   airFlow = true;
+  airDirection = 1;
+  isAirDown = true;
   fanCtrl: number;
 
   fan1 = true;
@@ -116,7 +118,7 @@ export class HomePage implements OnInit, OnDestroy{
     this.updatedData.fanCtrl = 1;
     this.swing = this.updatedData.swing;
     this.airFlow = this.updatedData.airFlow;
-    this.powerOn = this.updatedData.powerOn;
+    // this.powerOn = this.updatedData.powerOn;
   }
 
   powerMode() {
@@ -246,16 +248,32 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   setAirFlow(){
-    if (this.airFlow){
-      this.airFlow = false;
+    let actualAirDirection = this.airDirection;
+
+    if(this.isAirDown){
+      actualAirDirection++;
     }else{
-      this.airFlow = true;
+      actualAirDirection--;
     }
+      
+
+    if(actualAirDirection > 4){
+      actualAirDirection = 3;
+      this.isAirDown = false;
+    }
+    if(actualAirDirection < 1){
+      actualAirDirection = 2;
+      this.isAirDown = true;
+    }
+    this.airDirection = actualAirDirection;
+
     this.updatedData.airflow = this.airFlow;
     console.log('status:', this.updatedData);
     console.log('air flow: ' + this.airFlow);
     this.updateDeviceStatus();
   }
+
+ 
 
   tempUp(){
     let newTemp;

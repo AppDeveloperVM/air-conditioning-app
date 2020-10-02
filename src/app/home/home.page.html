@@ -17,7 +17,9 @@
     <ion-row>
     <ion-col col-xl="10" col-md="12" >
     <ion-row>
-      <ion-col>
+      <ion-col id="power_state">
+        <div id="icon"><ion-icon name="radio-button-on-outline" [ngClass]="{'red' : powerOn == false, 'green' : powerOn == true }"></ion-icon></div>
+        <div class="text">POWER</div>
       </ion-col>
       <ion-col>
       </ion-col>
@@ -59,11 +61,14 @@
                     <div *ngIf="temp"><span #temperature>{{ temp }}</span> ºC</div>
                     <div class="swing_air">
                       <div [hidden]=swing class="swing"><ion-icon name="swap-vertical-outline"></ion-icon></div>
-                      <div [hidden]=airFlow class="air_flow"><ion-icon name="help-buoy-outline"></ion-icon></div>
                       <div class="air_direction">
-                        <ion-icon name="remove-outline" class="line" id="line_1" small></ion-icon>
-                        <ion-icon name="remove-outline" class="line" id="line_2"></ion-icon>
-                        <ion-icon name="remove-outline" class="line" ID="line_3"></ion-icon>
+                        <hr id="line_1" [ngClass]="{'line' : true,'actual_direction': airDirection == 1}">
+                        <hr id="line_2" [ngClass]="{'line' : true,'actual_direction': airDirection == 2}">
+                        <hr id="line_3" [ngClass]="{'line' : true,'actual_direction': airDirection == 3}">
+                        <hr id="line_4" [ngClass]="{'line' : true,'actual_direction': airDirection == 4}">
+                      </div>
+                      <div class="air_device">
+                        <ion-icon name="tablet-landscape-outline" ></ion-icon>
                       </div>
                     </div>
                   </ion-col>
