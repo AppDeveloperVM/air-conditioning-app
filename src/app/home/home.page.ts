@@ -273,8 +273,6 @@ export class HomePage implements OnInit, OnDestroy{
     this.updateDeviceStatus();
   }
 
- 
-
   tempUp(){
     let newTemp;
     newTemp = this.updatedData.temp ;
@@ -295,29 +293,57 @@ export class HomePage implements OnInit, OnDestroy{
     this.updateDeviceStatus();
   }
 
-  toBinaryCode(){
-    //get values from this.updatedData array and transform it to binary string
-    let binaryString = "";
-    let temp_binary = "";
-    let temp_binary_reversed = "";
+  composeFullBinaryString() {
+    let maxPerByte = 8;
+    let binaryString = '';
+    let fullConfiguredString = '';
+    let tempBinary = '';
+    let powerOnBinary = '';
+    let masterCtrlBinary = '';
+    let fanCtrlBinary = '';
 
-    //ejemplo : temperatura to binary y luego se invierte, de derecha a izquierda
-    temp_binary = (+this.updatedData.temp).toString(2);
-    temp_binary_reversed = temp_binary.split("").reverse().join("");
-    console.log("temp in binary : " + temp_binary + ",reversed: " + temp_binary_reversed);
+    // formato conversion binaria
+    // POWER ON | NIVEL (Modo automático solamente)​ | ​TEMPERATURA​ | ​MASTER CONTROL ​| FAN CONTROL
+    const initialBinaryString = '2|00101000|11000110|00000000|00001000|00001000|00111111|00010000|00001100';
+    const finalBinaryString = '​0000|00000000|00001100|00101001|00101111|-2';
+
+    tempBinary = this.toBinaryCode( this.temp.toString() );
+    powerOnBinary = this.powerOn ? '0' : '1';
+    masterCtrlBinary = this.toBinaryCode( this.masterCtrl );
+    fanCtrlBinary = this.toBinaryCode( this.fanCtrl.toString() );
+
+    fullConfiguredString = powerOnBinary + /*nivel*/ '000' + tempBinary + '1100|' + fanCtrlBinary;
+    console.log('conf binary String: ' + fullConfiguredString );
+    console.log('full binary String: ' + initialBinaryString + '|' + fullConfiguredString + '   ' + finalBinaryString);
+  }
+
+  reverseString(data: string) {
+    let reversedString = '';
+    reversedString  = data.split('').reverse().join('');
+    return reversedString;
+  }
+
+  toBinaryCode(data: string){
+    let formattedData = '';
+    // ejemplo : temperatura to binary y luego se invierte, de derecha a izquierda
+    formattedData = this.reverseString( (+data).toString(2) );
+    if ( formattedData.length < 3 ){
+      formattedData = '00' + formattedData;
+    }
+    return formattedData;
   }
 
   updateDeviceStatus() {
 
-    //const headers = new Headers();
-    var options = { "headers": 
+    // const headers = new Headers();
+    let options = { 'headers':
       {
       //'Access-Control-Request-Method': 'POST', 
       //'Access-Control-Request-Headers': 'Content-Type',
       //'Content-Type' :'text/json',
       //'Accept': 'text/html'
       //'Charset': 'UTF-8'
-      } 
+      }
     };
 
     const headers = new HttpHeaders();
@@ -332,21 +358,21 @@ export class HomePage implements OnInit, OnDestroy{
       swing: this.updatedData.swing ? true : false,
       air_direction: 1
     };*/
-    
+
     //&powerOn=${this.powerOn ? 'ON' : 'OFF'}
     //const power_var = this.powerOn ? '&powerOn=ON' : '';
 
     const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.masterCtrl}&fanCtrl=${this.updatedData.fanCtrl}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1`;
     console.log(postData);
 
-    this.toBinaryCode();
+    this.composeFullBinaryString();
 
     if ( this.sendDataEnabled ){
       this.httpClient.post(
         this.deviceUrl,
         postData,
-        { 
-          headers: headers,
+        {
+          headers,
           observe: 'body',
           responseType: 'text'
         }
@@ -357,7 +383,7 @@ export class HomePage implements OnInit, OnDestroy{
           console.log(error);
       });
     } else {
-      console.log("SendData not enabled");
+      console.log('SendData not enabled');
     }
 
   }
