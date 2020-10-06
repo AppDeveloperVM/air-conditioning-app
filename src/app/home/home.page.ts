@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AlertController, NavController } from '@ionic/angular';
 import { AirDataService } from '../services/air-data.service';
 import { AirConditioner } from './models/air-conditioner.model';
+import { last } from 'rxjs/operators';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class HomePage implements OnInit, OnDestroy{
 
   time = '00:00';
   temp = 0;
-  //masterCtrl
+  // masterCtrl
   masterCtrl: any = ['AUTO', 'COOL', 'DRY', 'FAN', 'HEAT']; // modes
   fanIndex = 0;
   fan: any = ['AUTO', 'HIGH', 'MED', 'LOW', 'QUIET'];
@@ -49,6 +50,11 @@ export class HomePage implements OnInit, OnDestroy{
   swing = true;
   airFlow = true;
   airDirection = 1;
+
+  airDirectionChanged = false;
+  swingChanged = false;
+  powerChanged = false;
+
   isAirDown = true;
   fanCtrl: number;
 
@@ -112,7 +118,7 @@ export class HomePage implements OnInit, OnDestroy{
     console.log('updatedData:' , this.updatedData);
     this.time = this.updatedData.time;
     this.temp = this.updatedData.temp;
-    this.modeIndex = 0; // 
+    this.modeIndex = 0; //
     this.masterCtrl = 0; // this.masterCtrl.indexOf(this.updatedData.modeIndex);
     this.updatedData.masterCtrl = 0;
     this.fanCtrl = 2; // this.fan.indexOf(this.updatedData.fanCtrl);
@@ -128,6 +134,7 @@ export class HomePage implements OnInit, OnDestroy{
     } else {
       this.powerOn = true;
     }
+    this.powerChanged = true;
     this.updateDeviceStatus();
   }
 
@@ -188,7 +195,7 @@ export class HomePage implements OnInit, OnDestroy{
     if (fanActualSpeed === 5){
       fanActualSpeed = 1;
     }
-    //console.log('fan control speed: ' + fanActualSpeed);
+    // console.log('fan control speed: ' + fanActualSpeed);
     this.setFanSpeedIcon(fanActualSpeed);
   }
 
@@ -238,6 +245,7 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   setSwing(){
+    this.swingChanged = true;
     if (this.swing){
       this.swing = false;
     } else {
@@ -250,19 +258,20 @@ export class HomePage implements OnInit, OnDestroy{
 
   setAirFlow(){
     let actualAirDirection = this.airDirection;
+    this.airDirectionChanged = true;
 
-    if(this.isAirDown){
+    if (this.isAirDown){
       actualAirDirection++;
     }else{
       actualAirDirection--;
     }
-      
 
-    if(actualAirDirection > 4){
+
+    if (actualAirDirection > 4){
       actualAirDirection = 3;
       this.isAirDown = false;
     }
-    if(actualAirDirection < 1){
+    if (actualAirDirection < 1){
       actualAirDirection = 2;
       this.isAirDown = true;
     }
@@ -301,20 +310,36 @@ export class HomePage implements OnInit, OnDestroy{
     let powerOnBinary = '';
     let masterCtrlBinary = '';
     let fanCtrlBinary = '';
+    let lastByte = '';
 
     // formato conversion binaria
     // POWER ON | NIVEL (Modo automático solamente)​ | ​TEMPERATURA​ | ​MASTER CONTROL ​| FAN CONTROL
     const initialBinaryString = '2|00101000|11000110|00000000|00001000|00001000|00111111|00010000|00001100';
-    const finalBinaryString = '​0000|00000000|00001100|00101001|00101111|-2';
+    const midBinaryString = '​0000|00000000|00001100|00101001|';
 
     tempBinary = this.toBinaryCode( this.temp.toString() );
-    powerOnBinary = this.powerOn ? '0' : '1';
+    powerOnBinary = this.powerOn ? '1' : '0';
     masterCtrlBinary = this.toBinaryCode( this.masterCtrl );
     fanCtrlBinary = this.toBinaryCode( this.fanCtrl.toString() );
+    lastByte = '00101111';
+
+    if (this.airDirectionChanged){
+      lastByte = '​00110110'; // Air Direction
+    }
+    if (this.swingChanged){
+      lastByte = '​10110110'; // Swing Louver
+    }
+    if (this.powerChanged){
+      lastByte = '​​01000000'; // PowerOff
+    }
 
     fullConfiguredString = powerOnBinary + /*nivel*/ '000' + tempBinary + '1100|' + fanCtrlBinary;
     console.log('conf binary String: ' + fullConfiguredString );
-    console.log('full binary String: ' + initialBinaryString + '|' + fullConfiguredString + '   ' + finalBinaryString);
+    console.log('full binary String: '
+      + initialBinaryString + '|'
+      + fullConfiguredString + ''
+      + midBinaryString + lastByte  + '|-2'
+    );
   }
 
   reverseString(data: string) {
@@ -359,13 +384,17 @@ export class HomePage implements OnInit, OnDestroy{
       air_direction: 1
     };*/
 
-    //&powerOn=${this.powerOn ? 'ON' : 'OFF'}
-    //const power_var = this.powerOn ? '&powerOn=ON' : '';
+    // &powerOn=${this.powerOn ? 'ON' : 'OFF'}
+    // const power_var = this.powerOn ? '&powerOn=ON' : '';
 
     const postData = `time=${this.updatedData.time}&temp=${this.updatedData.temp}&masterCtrl=${this.updatedData.masterCtrl}&fanCtrl=${this.updatedData.fanCtrl}&powerOn=${this.powerOn ? 'ON' : 'OFF'}&swing=${this.updatedData.swing ? 'ON' : 'OFF'}&air_direction=1`;
     console.log(postData);
 
     this.composeFullBinaryString();
+
+    this.airDirectionChanged = false;
+    this.swingChanged = false;
+    this.powerChanged = false;
 
     if ( this.sendDataEnabled ){
       this.httpClient.post(
